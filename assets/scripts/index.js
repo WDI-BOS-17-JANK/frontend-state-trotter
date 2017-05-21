@@ -12,11 +12,16 @@ $(() => {
 
 // use require without a reference to ensure a file is bundled
 require('./example')
-
+require('./jquery.vmap.js')
+require('./jquery.vmap.usa.js')
 const authEvents = require('./auth/events.js')
 // const flashcardEvents = require('./flashcard/events.js')
+const usmap = function () {
+  $('#vmap').vectorMap({ map: 'usa_en' })
+}
 
 $(() => {
   authEvents.addHandlers()
+  usmap()
   // flashcardEvents.addFlashcardHandlers()
 })
