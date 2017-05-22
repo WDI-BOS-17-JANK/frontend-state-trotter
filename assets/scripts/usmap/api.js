@@ -4,7 +4,7 @@ const config = require('../config.js')
 const store = require('../store.js')
 
 // GET
-const getItems = function() {
+const getItems = function () {
   return $.ajax({
     method: 'GET',
     url: config.apiOrigin + '/items',
@@ -34,7 +34,26 @@ const createItem = function (content) {
   })
 }
 
+const updateItem = function (content) {
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiOrigin + '/items/' + content.item.id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      item: {
+        description: content.item.description,
+        due_date: content.item.due_date,
+        status: content.item.status,
+        title: content.item.title
+      }
+    }
+  })
+}
+
 module.exports = {
   getItems,
-  createItem
+  createItem,
+  updateItem
 }

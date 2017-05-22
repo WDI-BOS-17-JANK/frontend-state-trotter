@@ -23,6 +23,15 @@ const onCreateItem = function (event) {
     .catch(ui.createItemFailure)
 }
 
+const onUpdateItem = function (event) {
+  const content = getFormFields(event.target)
+  event.preventDefault(
+    api.updateItem(content)
+    .then(ui.updateItemSuccess)
+    .catch(ui.updateItemFailure)
+  )
+}
+
 // Change the styling, click event, and hover effects of the map by altering code below
 const usMap = function () {
   $('#vmap').vectorMap({
@@ -48,10 +57,12 @@ const usMap = function () {
 
 const addHandlers = () => {
   $('#item-create').on('submit', onCreateItem)
+  $('#item-update').on('submit', onUpdateItem)
 }
 
 module.exports = {
   addHandlers,
   usMap,
-  onCreateItem
+  onCreateItem,
+  onUpdateItem
 }

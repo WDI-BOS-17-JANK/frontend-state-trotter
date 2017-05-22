@@ -20,9 +20,19 @@ const createItemFailure = (data) => {
   console.error(data)
 }
 
+const updateItemSuccess = (data) => {
+  console.log(data)
+}
+
+const updateItemFailure = (data) => {
+  console.error(data)
+}
+
 module.exports = {
   getItemsSuccess,
   getItemsFailure,
   createItemSuccess,
-  createItemFailure
+  createItemFailure,
+  updateItemSuccess,
+  updateItemFailure
 }
