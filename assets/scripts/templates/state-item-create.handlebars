@@ -1,0 +1,12 @@
+<!-- Empty form to create new item -->
+<form id="create-item" class="create-item" data-id="{{item.id}}">
+  <fieldset>
+    <input type="text" name="items[title]" placeholder="Goal">
+    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="items[due_date]" placeholder="Last time viewed">
+    <input type="text" name="items[location]" placeholder="Location">
+    <input type="text" name="items[description]" placeholder="Location">
+    <input type="text" name="items[category]" placeholder="Location">
+    <button data-id="{{item.id}}" class="glyphicon glyphicon-ok-circle" type="button" name="Add"></button>
+    <button data-id="{{item.id}}" type="button" name="Cancel"></button>
+  </fieldset>
+</form>

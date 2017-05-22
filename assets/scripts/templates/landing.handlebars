@@ -1,0 +1,94 @@
+<!-- {{#each flashcards as |flashcard|}} -->
+
+<header id="header" class="header">
+  <div class="module parallax parallax-1">
+    <div class="parallax-container"
+
+      <div class="auth-modals">
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="modal-signup-button modal-btn" data-toggle="modal" data-target="#modal-signup">Sign up</button>
+        <!-- Modal -->
+        <div id="modal-signup" class="modal fade modal-signup" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <!-- Modal header-->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign up</h4>
+              </div>
+              <!-- Modal body-->
+              <div class="modal-body">
+                <form id="sign-up" class="text-align-center">
+                  <fieldset>
+                    <input type="text" name="credentials[email]" placeholder="email">
+                    <!-- name matters. Our object is made to look like what we see in sign-uo.sh  -->
+                    <input type="password" name="credentials[password]" placeholder="password">
+                    <input type="password" name="credentials[password_confirmation]" placeholder="password_confirmation">
+                    <input type="submit" name="submit" value="Submit">
+                  </fieldset>
+                </form>
+              </div>
+              <!-- Modal footer-->
+              <div class="modal-footer">
+                <p id="signup-status-message" class="signup-status-message text-align-center"></p>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="modal-btn modal-signin-button" data-toggle="modal" data-target="#modal-signin">Sign in</button>
+        <!-- Modal -->
+        <div id="modal-signin" class="modal fade modal-signin" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <!-- Modal header-->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign in</h4>
+              </div>
+              <!-- Modal body-->
+              <div class="modal-body">
+                <form id="sign-in" class="text-align-center">
+                  <fieldset>
+                    <input type="text" name="credentials[email]" placeholder="email">
+                    <!-- [email] is the key of credentials object. name matters. Our object is made to look like what we see in sign-uo.sh  -->
+                    <input type="password" name="credentials[password]" placeholder="password">
+                    <input type="submit" name="submit" value="Submit">
+                  </fieldset>
+                </form>
+              </div>
+              <!-- Modal footer-->
+              <div class="modal-footer">
+                <p id="signin-status-message" class="signin-status-message text-align-center"></p>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1 id="hero-header" class="hero-header text-align-center">St<span class="blur red">a</span>te Trotter</h1>
+        <h3 id="header-status-message" class="header-status-message text-align-center">What's on your bucket list for Massachusetts?</h3>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+
+
+
+<!-- {{/each}} -->
+
+
+
+<!-- what partial does: adds a line for each book "I'm a partial that's included in every book iteration ". It's just a handlebars file that's being required by another handlebar file -->
+<!-- if you call this partial partiale, then the partial.handlebar file should be called partiale.handlebar -->
