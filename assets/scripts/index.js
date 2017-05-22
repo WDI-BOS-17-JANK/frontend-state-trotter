@@ -4,6 +4,21 @@ const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 const mapEvents = require('./usmap/events.js')
 
+const showLandingTemplate = require('../templates/landing.handlebars')
+const showMapTemplate = require('../templates/map.handlebars')
+const showStateAllTemplate = require('../templates/state-all-items.handlebars')
+const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
+const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
+const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
+
+// showLandingTemplate()
+// showMapTemplate()
+// showStateAllTemplate()
+// showStateItemCreateTemplate()
+// showStateItemDetailsTemplate()
+// showStateItemUpdateTemplate()
+//
+
 $(() => {
   setAPIOrigin(location, config)
 })
