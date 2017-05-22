@@ -29,6 +29,6 @@ const authEvents = require('./auth/events.js')
 $(() => {
   $('#landing-view-container').append(landingTemplate)
   authEvents.addLandingHandlers()
-  mapEvents.usMap()
+  // mapEvents.usMap() Need to call this when we get to map page instead of loading it on document ready.
   // mapEvents.addHandlers()
 })

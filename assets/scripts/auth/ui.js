@@ -7,13 +7,7 @@ const store = require('../store.js')
 
 const signUpSuccess = (response) => { // argument can be (response) or something too. Just an argument name
   // $('.signup-status-message').text('Successfully signed up. Please wait for page to load.')
-  // $('#modal-signup').modal('hide')
-  $('.header').hide()
-  $('.flashcard-container').fadeIn()
-  $('.flashcard-container-header').show()
-  $('footer').fadeIn()
-  $('#view-all').fadeIn()
-  // clear form input text upon sign in
+  $('#modal-signup').modal('hide')
   document.getElementById('sign-up').reset()
 
   store.user = response.user // response.user is the email id and token // stores whatever that was in that response
@@ -29,6 +23,7 @@ const signUpFailure = () => {
 
 const signInSuccess = (response) => { // argument can be (response) or something too. Just an argument name
   console.log(response)
+  $('#modal-signin').modal('hide')
   document.getElementById('sign-in').reset()
   // In case someone clicks 'back' in browser while siebar still open, then goes forward again to the page, and signs in.
 
