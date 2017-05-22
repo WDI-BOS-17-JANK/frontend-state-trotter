@@ -4,6 +4,7 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
 const ui = require('./ui')
+const mainPageNav = require('../templates/main-page-nav.handlebars')
 // const board = require('../board')
 
 const onSignUp = function (event) {
@@ -27,6 +28,13 @@ const onSignIn = function (event) { // stop here , add console to check if code 
   const data = getFormFields(this)
   api.signIn(data)
     .then(ui.signInSuccess)
+    .then(() => {
+      return $('#modal-signin').modal('hide')
+      // console.log('in landing-view-controller update')
+    })
+    .then(() => {
+      $('#landing-view-container').html(mainPageNav)
+    })
     .catch(ui.signInFailure)
 }
 

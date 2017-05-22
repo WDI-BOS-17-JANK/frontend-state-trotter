@@ -26,13 +26,8 @@ const signInSuccess = (response) => { // argument can be (response) or something
   $('#modal-signin').modal('hide')
   document.getElementById('sign-in').reset()
   // In case someone clicks 'back' in browser while siebar still open, then goes forward again to the page, and signs in.
-
   store.user = response.user // response.user is the email id and token // stores whatever that was in that response
-
-  // don't use event.preventDefault() or else won't work
-//   flashcardapi.getFlashcards()
-//     .then(flashcardui.getFlashcardsSuccess)
-//     .catch(flashcardui.getFlashcardsFailure)
+  console.log('signInSuccess complete')
 }
 
 const signInFailure = () => {
