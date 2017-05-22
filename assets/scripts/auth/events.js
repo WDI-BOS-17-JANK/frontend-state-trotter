@@ -23,8 +23,8 @@ const onSignUp = function (event) {
 }
 
 const onSignIn = function (event) { // stop here , add console to check if code is working so far
-  const data = getFormFields(this)
   event.preventDefault()
+  const data = getFormFields(this)
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
@@ -45,13 +45,13 @@ const onSignOut = function (event) {
     .catch(ui.signOutFailure)
 }
 
-const addHandlers = () => {
+const addLandingHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
-  $('#change-password').on('submit', onChangePassword)
-  $('#sign-out').on('submit', onSignOut)
+  // $('#change-password').on('submit', onChangePassword)
+  // $('#sign-out').on('submit', onSignOut)
 }
 
 module.exports = {
-  addHandlers
+  addLandingHandlers
 }
