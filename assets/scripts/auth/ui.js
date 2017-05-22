@@ -28,19 +28,9 @@ const signUpFailure = () => {
 }
 
 const signInSuccess = (response) => { // argument can be (response) or something too. Just an argument name
-  $('.signin-status-message').text('Successfully signed in. Please wait for page to load.')
-  $('#modal-signin').modal('hide')
-  $('.header').hide()
-  $('.flashcard-container').fadeIn()
-  $('.flashcard-container-header').show()
-  $('footer').fadeIn()
-  $('#view-all').fadeIn()
-  // clear form input text upon sign in
+  console.log(response)
   document.getElementById('sign-in').reset()
   // In case someone clicks 'back' in browser while siebar still open, then goes forward again to the page, and signs in.
-  if ($('input[name=hamburger-menu').is(':checked')) {
-    $('input[name=hamburger-menu]').click()
-  }
 
   store.user = response.user // response.user is the email id and token // stores whatever that was in that response
 

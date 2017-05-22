@@ -3,16 +3,17 @@ require('../jquery.vmap.usa.js')
 
 // const getFormFields = require(`../../../lib/get-form-fields`)
 
-// const api = require('./api')
-// const ui = require('./ui')
+const api = require('./api')
+const ui = require('./ui')
 
-// const onGetItems = function (event) {
-//   console.log('inside onGetItems')
-//   event.preventDefault()
-//   api.getItems()
-//     // .then(ui.getItemsSuccess)
-//     // .catch(ui.getItemsFailure)
-// }
+const onGetItems = function (element, code, region) {
+  // event.preventDefault()
+  api.getItems()
+    .then((data) => {
+      ui.getItemsSuccess(data, region)
+    })
+    .catch(ui.getItemsFailure)
+}
 
 // Change the styling, click event, and hover effects of the map by altering code below
 const usMap = function () {
@@ -32,15 +33,7 @@ const usMap = function () {
     selectedRegions: null,
     showTooltip: true,
     onRegionClick: function (element, code, region) {
-    // const message = 'You clicked "'
-    //     + region
-    //     + '" which has the code: '
-    //     + code.toUpperCase();
-    //
-    // alert(message);
-      console.log('element is ', element)
-      console.log('code is ', code)
-      console.log('region is ', region)
+      onGetItems(element, code, region)
     }
   })
 }

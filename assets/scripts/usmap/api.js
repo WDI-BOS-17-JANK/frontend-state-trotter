@@ -7,7 +7,7 @@ const store = require('../store.js')
 const getItems = function () {
   return $.ajax({
     method: 'GET',
-    url: config.apiOrigin + '/items/',
+    url: config.apiOrigin + '/items',
     headers: {
       Authorization: 'Token token=' + store.user.token
     }
