@@ -12,7 +12,17 @@ const getItemsFailure = (data) => {
   console.error(data)
 }
 
+const createItemSuccess = (data) => {
+  console.log(data)
+}
+
+const createItemFailure = (data) => {
+  console.error(data)
+}
+
 module.exports = {
   getItemsSuccess,
-  getItemsFailure
+  getItemsFailure,
+  createItemSuccess,
+  createItemFailure
 }

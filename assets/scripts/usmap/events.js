@@ -1,7 +1,7 @@
 require('../jquery.vmap.js')
 require('../jquery.vmap.usa.js')
 
-// const getFormFields = require(`../../../lib/get-form-fields`)
+const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
 const ui = require('./ui')
@@ -13,6 +13,14 @@ const onGetItems = function (element, code, region) {
       ui.getItemsSuccess(data, region)
     })
     .catch(ui.getItemsFailure)
+}
+
+const onCreateItem = function (event) {
+  const content = getFormFields(event.target)
+  event.preventDefault()
+  api.createItem(content)
+    .then(ui.createItemSuccess)
+    .catch(ui.createItemFailure)
 }
 
 // Change the styling, click event, and hover effects of the map by altering code below
@@ -38,15 +46,12 @@ const usMap = function () {
   })
 }
 
-// const addFlashcardHandlers = () => {
-//   $('#create-flashcard').on('submit', onCreateFlashcard)
-//   // $('#get-flashcard').on('submit', onGetFlashcard)
-//   $('#get-flashcards').on('submit', onGetFlashcards)
-//   $('#update-card-button').on('click', onClickUpdateButton)
-//   $('#create-card-button').on('click', onClickCreateButton)
-// }
+const addHandlers = () => {
+  $('#item-create').on('submit', onCreateItem)
+}
 
 module.exports = {
-  // onGetItems,
-  usMap
+  addHandlers,
+  usMap,
+  onCreateItem
 }

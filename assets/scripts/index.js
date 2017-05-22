@@ -51,5 +51,5 @@ const authEvents = require('./auth/events.js')
 $(() => {
   authEvents.addHandlers()
   mapEvents.usMap()
-  // flashcardEvents.addFlashcardHandlers()
+  mapEvents.addHandlers()
 })
