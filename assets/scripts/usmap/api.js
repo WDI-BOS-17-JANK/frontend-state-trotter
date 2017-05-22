@@ -28,7 +28,9 @@ const createItem = function (content) {
         due_date: content.item.due_date,
         state: content.item.state,
         status: content.item.status,
-        title: content.item.title
+        title: content.item.title,
+        category: content.item.category,
+        location: content.item.location
       }
     }
   })
@@ -46,7 +48,9 @@ const updateItem = function (content) {
         description: content.item.description,
         due_date: content.item.due_date,
         status: content.item.status,
-        title: content.item.title
+        title: content.item.title,
+        category: content.item.category,
+        location: content.item.location
       }
     }
   })
