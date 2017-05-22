@@ -27,13 +27,23 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Change password</a></li>
-                <li><a href="#">Sign out</a></li>
-                <li><a href="#">Something else here</a></li>
+                <li>
+                  <form id="change-password" class="change-password text-align-center">
+                    <fieldset>
+                      <input type="password" name="passwords[old]" placeholder="old password">
+                      <input type="password" name="passwords[new]" placeholder="new password">
+                      <input type="submit" name="submit" value="Submit">
+                    </fieldset>
+                  </form>
+                </li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
+                <li>
+                  <form id="sign-out" class="sign-out text-align-center">
+                    <fieldset>
+                      <input type="submit" name="submit" value="Sign out">
+                    </fieldset>
+                  </form>
+                </li>
               </ul>
             </li>
           </ul>
