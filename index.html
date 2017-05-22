@@ -98,17 +98,36 @@
         </div>
       </div>
 
+      <form id="item-create" class="form-signin">
+         <label>Create Item</label>
+         <input name="item[title]" type="text" class="form-control" required="" autofocus="" placeholder="title">
+         <input name="item[description]" type="text" class="form-control" required="" autofocus="" placeholder="description">
+         <input name="item[state]" type="text" class="form-control" required="" autofocus="" placeholder="state">
+         <input name="item[due_date]" type="text" class="form-control" required="" autofocus="" placeholder="due date">
+         <input name="item[status]" type="text" class="form-control" required="" autofocus="" placeholder="status">
+         <input name="item[location]" type="text" class="form-control" required="" autofocus="" placeholder="location">
+         <input name="item[category]" type="text" class="form-control" required="" autofocus="" placeholder="category">
+         <button class="btn btn-default btn-block" type="submit">Create</button>
+       </form>
 
+       <form id="item-update" class="form-signin">
+          <label>Create Item</label>
+          <input name="item[title]" type="text" class="form-control" required="" autofocus="" placeholder="title">
+          <input name="item[description]" type="text" class="form-control" required="" autofocus="" placeholder="description">
+          <input name="item[due_date]" type="text" class="form-control" required="" autofocus="" placeholder="due date">
+          <input name="item[status]" type="text" class="form-control" required="" autofocus="" placeholder="status">
+          <input name="item[location]" type="text" class="form-control" required="" autofocus="" placeholder="location">
+          <input name="item[category]" type="text" class="form-control" required="" autofocus="" placeholder="category">
+          <input name="item[id]" type="text" class="form-control" required="" autofocus="" placeholder="id">
+          <button class="btn btn-default btn-block" type="submit">Update</button>
+        </form>
 
-      <h1>Example</h1>
+        <form id="item-destroy" class="form-signin">
+           <label>Delete Item</label>
+           <input name="item[id]" type="text" class="form-control" required="" autofocus="" placeholder="id">
+           <button class="btn btn-default btn-block" type="submit">Update</button>
+         </form>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
 
       <!-- Start of map code -->
     <div id="vmap" style="width: 600px; height: 400px;"></div>
