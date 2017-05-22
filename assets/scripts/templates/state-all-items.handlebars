@@ -1,0 +1,17 @@
+
+<!-- req.body.item[i].title -->
+{{#each item as |item|}}
+  <div id="checkbox-item" class="checkbox-item" data-id="{{item.id}}">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">{{item.title}}</span>
+    </label>
+  </div>
+
+{{/each}}
+
+<!-- req.body.item[i].description (.) -->
+
+<!-- what partial does: adds a line for each book "I'm a partial that's included in every book iteration ". It's just a handlebars file that's being required by another handlebar file -->
+<!-- if you call this partial partiale, then the partial.handlebar file should be called partiale.handlebar -->

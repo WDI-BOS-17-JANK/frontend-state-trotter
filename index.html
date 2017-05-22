@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>State Trotter</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags unless you know what you are doing -->
@@ -14,104 +14,53 @@
     </head>
     <body class="container-fluid">
 
-      <div class="module parallax parallax-1">
-        <div class="parallax-container"
+      <section id="landing-view-container" class="landing-view-container">
+        <!-- Landing page handlebar template start-->
+        <!-- Landing page handlebar template end-->
+      </section>
 
-          <div class="auth-modals">
-
-            <!-- Trigger the modal with a button -->
-            <button type="button" class="modal-signup-button modal-btn" data-toggle="modal" data-target="#modal-signup">Sign up</button>
-            <!-- Modal -->
-            <div id="modal-signup" class="modal fade modal-signup" role="dialog">
-              <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <!-- Modal header-->
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Sign up</h4>
-                  </div>
-                  <!-- Modal body-->
-                  <div class="modal-body">
-                    <form id="sign-up" class="text-align-center">
-                      <fieldset>
-                        <input type="text" name="credentials[email]" placeholder="email">
-                        <!-- name matters. Our object is made to look like what we see in sign-uo.sh  -->
-                        <input type="password" name="credentials[password]" placeholder="password">
-                        <input type="password" name="credentials[password_confirmation]" placeholder="password_confirmation">
-                        <input type="submit" name="submit" value="Submit">
-                      </fieldset>
-                    </form>
-                  </div>
-                  <!-- Modal footer-->
-                  <div class="modal-footer">
-                    <p id="signup-status-message" class="signup-status-message text-align-center"></p>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Trigger the modal with a button -->
-            <button type="button" class="modal-btn modal-signin-button" data-toggle="modal" data-target="#modal-signin">Sign in</button>
-            <!-- Modal -->
-            <div id="modal-signin" class="modal fade modal-signin" role="dialog">
-              <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <!-- Modal header-->
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Sign in</h4>
-                  </div>
-                  <!-- Modal body-->
-                  <div class="modal-body">
-                    <form id="sign-in" class="text-align-center">
-                      <fieldset>
-                        <input type="text" name="credentials[email]" placeholder="email">
-                        <!-- [email] is the key of credentials object. name matters. Our object is made to look like what we see in sign-uo.sh  -->
-                        <input type="password" name="credentials[password]" placeholder="password">
-                        <input type="submit" name="submit" value="Submit">
-                      </fieldset>
-                    </form>
-                  </div>
-                  <!-- Modal footer-->
-                  <div class="modal-footer">
-                    <p id="signin-status-message" class="signin-status-message text-align-center"></p>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero">
-            <h1 id="hero-header" class="hero-header text-align-center">Ki<span class="blur red">o</span>ku</h1>
-            <h3 id="header-status-message" class="header-status-message text-align-center">Master Japanese words</h3>
-            <h3 id="scroll-down-message" class="scroll-down-message">
-              Scroll down to learn more
-              <div class="glyphicon-hand-down-container">
-                <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span>
-              </div>
-            </h3>
-          </div>
+      <nav id="nav" class="nav">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Link</a></li> -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Change password</a></li>
+                <li><a href="#">Sign out</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      </div>
+      </nav>
 
+    <section id="map-view-container" class="map-view-container">
 
+      <!-- Map page handlebar template start-->
+      <!-- Map page handlebar templates end -->
 
-      <h1>Example</h1>
+    </section>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+    <section id="state-view" class="state-view">
+      <!-- State-all-items handlebar template start-->
+      <!-- State-all-items handlebar template end-->
 
-      <!-- Start of map code -->
-    <div id="vmap" style="width: 600px; height: 400px;"></div>
-      <!-- End of map code -->
+      <!-- State-item-details handlebar template start-->
+      <!-- State-item-details handlebar template end-->
+    </section>
+
+      <footer id="footer" class="footer">
+
+        <p id="footer-message" class="footer-message">Designed and Built with <span class="glyphicon glyphicon-heart"></span> by Joe, Arlo, Nikki, and Kelly
+        </p>
+
+      </footer>
+
     </body>
 </html>

@@ -1,0 +1,33 @@
+
+<section id="map-view" class="map-view">
+  <div id="goal-message" class="goal-message">
+    <h3>Next goal: Visit Grand Canyon by August 23rd</h3>
+  </div>
+
+  <aside id="us-map" class="us-map">
+    <!-- Start of map code -->
+    <div id="vmap" style="width: 600px; height: 400px;"></div>
+    <!-- End of map code -->
+    <h5>Click on a state to view or add new goals.</h5>
+  </aside>
+
+  <main id="goals" class="goals">
+    <h4>My goals</h4>
+
+    {{#each items as |item|}}
+      <div id="goal-response-container" class="goal-response-container" data-id="{{item.id}}">
+        <h3>
+          {{item.title}}
+        </h3>
+      </div>
+    {{/each}}
+
+  </main>
+
+</section>
+
+
+
+
+<!-- what partial does: adds a line for each book "I'm a partial that's included in every book iteration ". It's just a handlebars file that's being required by another handlebar file -->
+<!-- if you call this partial partiale, then the partial.handlebar file should be called partiale.handlebar -->
