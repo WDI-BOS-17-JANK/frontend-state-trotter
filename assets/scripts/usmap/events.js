@@ -7,7 +7,7 @@ const api = require('./api')
 const ui = require('./ui')
 
 const onGetItems = function (element, code, region) {
-  // event.preventDefault()
+  event.preventDefault()
   api.getItems()
     .then((data) => {
       ui.getItemsSuccess(data, region)
@@ -15,13 +15,14 @@ const onGetItems = function (element, code, region) {
     .catch(ui.getItemsFailure)
 }
 
-const onCreateItem = function (event) {
-  const content = getFormFields(event.target)
-  event.preventDefault()
-  api.createItem(content)
-    .then(ui.createItemSuccess)
-    .catch(ui.createItemFailure)
-}
+// const onCreateItem = function (event) {
+//   console.log('inside events/onCreateItem')
+//   event.preventDefault()
+//   const content = getFormFields(event.target)
+//   api.createItem(content)
+//     .then(ui.createItemSuccess)
+//     .catch(ui.createItemFailure)
+// }
 
 const onUpdateItem = function (event) {
   const content = getFormFields(event.target)
@@ -57,13 +58,14 @@ const usMap = function () {
     selectedRegions: null,
     showTooltip: true,
     onRegionClick: function (element, code, region) {
+      console.log('what state did i click on?', region)
       onGetItems(element, code, region)
     }
   })
 }
 
 const addHandlers = () => {
-  $('#item-create').on('submit', onCreateItem)
+  // $('#create-item').on('submit', onCreateItem)
   $('#item-update').on('submit', onUpdateItem)
   $('#item-destroy').on('submit', onDestroyItem)
 }
@@ -71,6 +73,6 @@ const addHandlers = () => {
 module.exports = {
   addHandlers,
   usMap,
-  onCreateItem,
+  // onCreateItem,
   onUpdateItem
 }
