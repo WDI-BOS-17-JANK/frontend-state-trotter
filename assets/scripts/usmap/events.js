@@ -25,11 +25,18 @@ const onCreateItem = function (event) {
 
 const onUpdateItem = function (event) {
   const content = getFormFields(event.target)
-  event.preventDefault(
-    api.updateItem(content)
+  event.preventDefault()
+  api.updateItem(content)
     .then(ui.updateItemSuccess)
     .catch(ui.updateItemFailure)
-  )
+}
+
+const onDestroyItem = function (event) {
+  const content = getFormFields(event.target)
+  event.preventDefault()
+  api.destroyItem(content)
+    .then(ui.destroyItemSuccess)
+    .catch(ui.destroyItemFailure)
 }
 
 // Change the styling, click event, and hover effects of the map by altering code below
@@ -58,6 +65,7 @@ const usMap = function () {
 const addHandlers = () => {
   $('#item-create').on('submit', onCreateItem)
   $('#item-update').on('submit', onUpdateItem)
+  $('#item-destroy').on('submit', onDestroyItem)
 }
 
 module.exports = {

@@ -52,8 +52,19 @@ const updateItem = function (content) {
   })
 }
 
+const destroyItem = function (content) {
+  return $.ajax({
+    method: 'DELETE',
+    url: config.apiOrigin + '/items/' + content.item.id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   getItems,
   createItem,
-  updateItem
+  updateItem,
+  destroyItem
 }

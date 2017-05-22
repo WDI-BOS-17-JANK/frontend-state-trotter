@@ -28,11 +28,21 @@ const updateItemFailure = (data) => {
   console.error(data)
 }
 
+const destroyItemSuccess = (data) => {
+  console.log(data)
+}
+
+const destroyItemFailure = (data) => {
+  console.error(data)
+}
+
 module.exports = {
   getItemsSuccess,
   getItemsFailure,
   createItemSuccess,
   createItemFailure,
   updateItemSuccess,
-  updateItemFailure
+  updateItemFailure,
+  destroyItemFailure,
+  destroyItemSuccess
 }
