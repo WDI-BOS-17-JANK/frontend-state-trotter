@@ -5,6 +5,7 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 const mainPageNav = require('../templates/main-page-nav.handlebars')
+const store = require('../store.js')
 // const board = require('../board')
 
 const onSignUp = function (event) {
@@ -50,7 +51,10 @@ const addLandingHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#modal-signin').on('hidden.bs.modal', function () {
-    $('#landing-view-container').html(mainPageNav)
+    console.log('store.user is ', store.user)
+    if (store.user !== undefined) {
+      $('#landing-view-container').html(mainPageNav)
+    }
   })
   // $('#change-password').on('submit', onChangePassword)
   // $('#sign-out').on('submit', onSignOut)
