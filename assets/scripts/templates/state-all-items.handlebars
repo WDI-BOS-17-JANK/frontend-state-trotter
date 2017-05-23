@@ -1,16 +1,32 @@
 
 <!-- req.body.item[i].title -->
-{{#each item as |item|}}
-  <div id="checkbox-item" class="checkbox-item" data-id="{{item.id}}">
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">{{item.title}}</span>
-    </label>
+<div class="row checkbox">
+  <div class="col-sm-8">
+    {{#each items as |item|}}
+      <div class="checkbox-item" data-id="{{item.id}}">
+        <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{item.title}}</span>
+            </label>
+      </div>
+
+    {{/each}}
+    <div id="new-item-container" class="new-item-container">
+      <!-- Start add-item-to-list.handlebars -->
+      <!-- End add-item-to-list.handlebars -->
+    </div>
+    <button type="button" name="button" id="create-button" class="create-button glyphicon glyphicon-plus"></button>
   </div>
 
-{{/each}}
+  <div class="col-sm-4">
+    <div id="create-item-container" class="create-item-container">
 
+    </div>
+
+  </div>
+
+</div>
 <!-- req.body.item[i].description (.) -->
 
 <!-- what partial does: adds a line for each book "I'm a partial that's included in every book iteration ". It's just a handlebars file that's being required by another handlebar file -->

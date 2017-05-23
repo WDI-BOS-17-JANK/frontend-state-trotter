@@ -10,7 +10,7 @@ const api = require('./api')
 const ui = require('./ui')
 // const onCreateItem = require('./events')
 // const showLandingTemplate = require('../templates/landing.handlebars')
-// const showMapTemplate = require('../templates/map.handlebars')
+const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 // const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
@@ -19,27 +19,48 @@ const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
 
-const getItemsSuccess = (data, region) => {
-  // debugger
-  $('#state-view').append(showStateAllTemplate)
-  $('#state-view').append(showStateItemCreateTemplate)
-  $('#create-item').on('submit', onCreateItem)
-  // console.log(data)
-  // console.log('inside getItemsSucces region is', region)
-  const result = data.items.filter((item) => {
-    return item.state === region
-  })
-  console.log('result at getItemSuccess is', result)
-  console.log('what is state at getItemSuccess?', region)
-  store.state = region
+
+const showStateView = (items) => {
+  const itemByState = showStateAllTemplate(items)
+  $('#state-view').append(itemByState)
+  createFormHandler()
 }
 
+const showCreateform = () => {
+  $('#create-item-container').append(showStateItemCreateTemplate)
+  $('#create-item').on('submit', onCreateItem)
+}
+
+const createFormHandler = () => {
+  $('#create-button').on('click', showCreateform)
+}
+
+const hideMap = () => {
+  $('#map-view-container').empty()
+}
+
+const getItemsSuccess = (data, region) => {
+  store.state = region
+
+  const filteredItems = data.items.filter((item) => {
+    return item.state === region
+  })
+  hideMap()
+  // 'item' below has to be 'item' in state-all-items.handlebars
+  // We need to pass filteredItems to showStateView rather than data.items
+  showStateView({items: filteredItems})
+  hideMap()
+  $('#state-header').text(store.state)
+}
+
+const getItemsFailure = (data) => {
+  console.error(data)
+}
+
+
 const onCreateItem = function(event) {
-  console.log('what is store.state', store.state) // Michigan
   event.preventDefault()
-  console.log('event.target at onCreateItem is', event.target)
   const content = getFormFields(event.target)
-  console.log('inside ui/onCreateItem and the content is', content)
 
   const newData = {
     item: {
@@ -55,6 +76,14 @@ const onCreateItem = function(event) {
 
   api.createItem(newData)
     .then(createItemSuccess)
+    // pass in 'data' from createItemSuccess, call it 'newItem'
+    .then((newItem) => {
+      console.log(newItem)
+      // Pass in newly created item into add-item-to-list.handlebars
+      const newItemHtml = addItemToList({item: newItem.item})
+      // append this new html to #new-item-container in state-all-items.handlebars
+      $('#new-item-container').append(newItemHtml)
+    })
     .catch(createItemFailure)
 }
 
@@ -115,6 +144,9 @@ const getItemsFailure = (data) => {
 
 const createItemSuccess = (data) => {
   console.log('response is', data)
+  // disappear form on sucess
+  $('#create-item').remove()
+  return data
 }
 
 const createItemFailure = (data) => {
@@ -147,6 +179,6 @@ module.exports = {
   destroyItemFailure,
   destroyItemSuccess,
   getmyGoalsSuccess,
-  getmyGoalsFailure
-  // nextGoal
+  getmyGoalsFailure,
+  createFormHandler
 }
