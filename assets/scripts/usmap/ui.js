@@ -23,6 +23,10 @@ const showCreateform = () => {
 
 }
 
+const hideMap = () => {
+  $('#map-view-container').empty()
+}
+
 const getItemsSuccess = (data, region) => {
   showStateView()
   showCreateform()
@@ -32,6 +36,9 @@ const getItemsSuccess = (data, region) => {
   console.log('result at getItemSuccess is', result)
   console.log('what is state at getItemSuccess?', region)
   store.state = region
+  hideMap()
+  console.log('store.state in getItemSuccess is', store.state)
+  $('#state-header').text(store.state)
 }
 
 const onCreateItem = function (event) {

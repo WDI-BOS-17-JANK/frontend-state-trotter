@@ -53,7 +53,8 @@ const addLandingHandlers = () => {
   $('#modal-signin').on('hidden.bs.modal', function () {
     console.log('store.user is ', store.user)
     if (store.user !== undefined) {
-      $('#landing-view-container').html(mainPageNav)
+      $('#landing-view-container').html('')
+      $('#main-view-container').html(mainPageNav)
       $('#map-view-container').html(mapPage)
       mapEvents.usMap()
     }
