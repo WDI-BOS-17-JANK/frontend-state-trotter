@@ -14,13 +14,13 @@ const ui = require('./ui')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 
-const showStateView = () => {
-  $('#state-view').append(showStateAllTemplate)
+const showStateView = (items) => {
+  const itemByState = showStateAllTemplate(items)
+  $('#state-view').append(itemByState)
 }
 const showCreateform = () => {
   $('#state-view').append(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
-
 }
 
 const hideMap = () => {
@@ -28,7 +28,8 @@ const hideMap = () => {
 }
 
 const getItemsSuccess = (data, region) => {
-  showStateView()
+  // 'item' below has to be 'item' in state-all-items.handlebars
+  showStateView({items: data.items})
   showCreateform()
   const result = data.items.filter((item) => {
     return item.state === region
