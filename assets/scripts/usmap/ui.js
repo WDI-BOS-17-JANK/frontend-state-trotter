@@ -34,16 +34,16 @@ const hideMap = () => {
 }
 
 const getItemsSuccess = (data, region) => {
-  // 'item' below has to be 'item' in state-all-items.handlebars
-  showStateView({items: data.items})
-  const result = data.items.filter((item) => {
+  store.state = region
+
+  const filteredItems = data.items.filter((item) => {
     return item.state === region
   })
-  console.log('result at getItemSuccess is', result)
-  console.log('what is state at getItemSuccess?', region)
-  store.state = region
   hideMap()
-  console.log('store.state in getItemSuccess is', store.state)
+  // 'item' below has to be 'item' in state-all-items.handlebars
+  // We need to pass filteredItems to showStateView rather than data.items
+  showStateView({items: filteredItems})
+  hideMap()
   $('#state-header').text(store.state)
 }
 
