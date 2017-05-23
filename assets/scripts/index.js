@@ -2,6 +2,16 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
+const mapEvents = require('./usmap/events.js')
+const landingTemplate = require('./templates/landing.handlebars')
+
+// showLandingTemplate()
+// showMapTemplate()
+// showStateAllTemplate()
+// showStateItemCreateTemplate()
+// showStateItemDetailsTemplate()
+// showStateItemUpdateTemplate()
+//
 
 $(() => {
   setAPIOrigin(location, config)
@@ -15,13 +25,10 @@ require('./example')
 require('./jquery.vmap.js')
 require('./jquery.vmap.usa.js')
 const authEvents = require('./auth/events.js')
-// const flashcardEvents = require('./flashcard/events.js')
-const usmap = function () {
-  $('#vmap').vectorMap({ map: 'usa_en' })
-}
 
 $(() => {
-  authEvents.addHandlers()
-  usmap()
-  // flashcardEvents.addFlashcardHandlers()
+  $('#landing-view-container').append(landingTemplate)
+  authEvents.addLandingHandlers()
+  // mapEvents.usMap() Need to call this when we get to map page instead of loading it on document ready.
+  // mapEvents.addHandlers()
 })

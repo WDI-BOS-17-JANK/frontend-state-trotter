@@ -4,6 +4,8 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
 const ui = require('./ui')
+const mainPageNav = require('../templates/main-page-nav.handlebars')
+const store = require('../store.js')
 // const board = require('../board')
 
 const onSignUp = function (event) {
@@ -23,8 +25,8 @@ const onSignUp = function (event) {
 }
 
 const onSignIn = function (event) { // stop here , add console to check if code is working so far
-  const data = getFormFields(this)
   event.preventDefault()
+  const data = getFormFields(this)
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
@@ -45,13 +47,19 @@ const onSignOut = function (event) {
     .catch(ui.signOutFailure)
 }
 
-const addHandlers = () => {
+const addLandingHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
-  $('#change-password').on('submit', onChangePassword)
-  $('#sign-out').on('submit', onSignOut)
+  $('#modal-signin').on('hidden.bs.modal', function () {
+    console.log('store.user is ', store.user)
+    if (store.user !== undefined) {
+      $('#landing-view-container').html(mainPageNav)
+    }
+  })
+  // $('#change-password').on('submit', onChangePassword)
+  // $('#sign-out').on('submit', onSignOut)
 }
 
 module.exports = {
-  addHandlers
+  addLandingHandlers
 }

@@ -1,2 +1,14 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+.text-align-center {
+  text-align: center;
+}
+
+.center {
+  margin: auto;
+}
+
+footer {
+  margin-top: 100px;
+}
