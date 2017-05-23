@@ -10,17 +10,24 @@ const api = require('./api')
 const ui = require('./ui')
 // const onCreateItem = require('./events')
 // const showLandingTemplate = require('../templates/landing.handlebars')
-// const showMapTemplate = require('../templates/map.handlebars')
+const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
+
 
 const showStateView = (items) => {
   const itemByState = showStateAllTemplate(items)
   $('#state-view').append(itemByState)
+  createFormHandler()
 }
+
 const showCreateform = () => {
-  $('#state-view').append(showStateItemCreateTemplate)
+  $('#create-item-container').append(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
+}
+
+const createFormHandler = () => {
+  $('#create-button').on('click', showCreateform)
 }
 
 const hideMap = () => {
@@ -30,7 +37,6 @@ const hideMap = () => {
 const getItemsSuccess = (data, region) => {
   // 'item' below has to be 'item' in state-all-items.handlebars
   showStateView({items: data.items})
-  showCreateform()
   const result = data.items.filter((item) => {
     return item.state === region
   })
@@ -40,6 +46,10 @@ const getItemsSuccess = (data, region) => {
   hideMap()
   console.log('store.state in getItemSuccess is', store.state)
   $('#state-header').text(store.state)
+}
+
+const getItemsFailure = (data) => {
+  console.error(data)
 }
 
 const onCreateItem = function (event) {
@@ -60,17 +70,20 @@ const onCreateItem = function (event) {
 
   api.createItem(newData)
     .then(createItemSuccess)
+    // pass in 'data' from createItemSuccess, call it 'newItem'
+    .then((newItem) => {
+      console.log(newItem)
+      const newItemHtml = addItemToList({item: newItem.item})
+      $('#new-item-container').append(newItemHtml)
+    })
     .catch(createItemFailure)
-}
-
-const getItemsFailure = (data) => {
-  console.error(data)
 }
 
 const createItemSuccess = (data) => {
   console.log('response is', data)
   // disappear form on sucess
   $('#create-item').remove()
+  return data
 }
 
 const createItemFailure = (data) => {
@@ -101,5 +114,6 @@ module.exports = {
   updateItemSuccess,
   updateItemFailure,
   destroyItemFailure,
-  destroyItemSuccess
+  destroyItemSuccess,
+  createFormHandler
 }
