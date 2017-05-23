@@ -21,6 +21,7 @@ const myGoals = function () {
     .then((data) => {
       ui.getmyGoalsSuccess(data)
     })
+    .then(usMap)
     .catch(ui.getmyGoalsFailure)
 }
 
