@@ -15,6 +15,16 @@ const onGetItems = function (element, code, region) {
     .catch(ui.getItemsFailure)
 }
 
+const myGoals = function () {
+  event.preventDefault()
+  api.getItems()
+    .then((data) => {
+      ui.getmyGoalsSuccess(data)
+    })
+    .then(usMap)
+    .catch(ui.getmyGoalsFailure)
+}
+
 // const onCreateItem = function (event) {
 //   console.log('inside events/onCreateItem')
 //   event.preventDefault()
@@ -73,6 +83,7 @@ const addHandlers = () => {
 module.exports = {
   addHandlers,
   usMap,
+  myGoals,
   // onCreateItem,
   onUpdateItem
 }
