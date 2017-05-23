@@ -17,6 +17,7 @@ const showStateItemCreateTemplate = require('../templates/state-item-create.hand
 // const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
 const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
+const nextGoal = require('../templates/next-goal.handlebars')
 
 const getItemsSuccess = (data, region) => {
   // debugger
@@ -33,7 +34,7 @@ const getItemsSuccess = (data, region) => {
   store.state = region
 }
 
-const onCreateItem = function (event) {
+const onCreateItem = function(event) {
   console.log('what is store.state', store.state) // Michigan
   event.preventDefault()
   console.log('event.target at onCreateItem is', event.target)
@@ -60,13 +61,35 @@ const onCreateItem = function (event) {
 const getmyGoalsSuccess = (data) => {
   console.log('in getmyGoalsSuccess and data is', data)
 
-  data.items.forEach((item, i) => {
+  const sortedData = data.items.sort(function (a, b) {
+    a = new Date(a.due_date)
+    b = new Date(b.due_date)
+    return a > b ? 1 : a < b ? -1 : 0
+  })
+
+  const incompleteItems = sortedData.filter((item) => {
+    return item.status === 'incomplete'
+  })
+  console.log('incompleteItems is', incompleteItems)
+
+  const nextIncompleteItem = incompleteItems[0]
+  console.log('nextIncompleteItem is', nextIncompleteItem)
+
+  $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
+
+  sortedData.forEach((item, i) => {
     if (i % 3 === 0) {
-      $('#goal-column-0').append(allGoals({item: item}))
+      $('#goal-column-0').append(allGoals({
+        item: item
+      }))
     } else if (i % 3 === 1) {
-      $('#goal-column-1').append(allGoals({item: item}))
+      $('#goal-column-1').append(allGoals({
+        item: item
+      }))
     } else if (i % 3 === 2) {
-      $('#goal-column-2').append(allGoals({item: item}))
+      $('#goal-column-2').append(allGoals({
+        item: item
+      }))
     }
   })
 }
@@ -114,4 +137,5 @@ module.exports = {
   destroyItemSuccess,
   getmyGoalsSuccess,
   getmyGoalsFailure
+  // nextGoal
 }
