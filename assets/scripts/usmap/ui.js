@@ -75,6 +75,17 @@ const getmyGoalsSuccess = (data) => {
   const nextIncompleteItem = incompleteItems[0]
   console.log('nextIncompleteItem is', nextIncompleteItem)
 
+  const date = new Date(nextIncompleteItem.due_date)
+
+  const month = date.getUTCMonth() + 1
+  const day = date.getUTCDate()
+  const year = date.getUTCFullYear()
+
+  const forDisplay = month + '/' + day + '/' + year
+  console.log('THE DATE IS NOW', forDisplay)
+
+  nextIncompleteItem.due_date = forDisplay
+
   $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
 
   sortedData.forEach((item, i) => {
