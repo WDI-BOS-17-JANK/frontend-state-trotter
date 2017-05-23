@@ -14,7 +14,6 @@ const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 
-
 const showStateView = (items) => {
   const itemByState = showStateAllTemplate(items)
   $('#state-view').append(itemByState)
@@ -73,7 +72,9 @@ const onCreateItem = function (event) {
     // pass in 'data' from createItemSuccess, call it 'newItem'
     .then((newItem) => {
       console.log(newItem)
+      // Pass in newly created item into add-item-to-list.handlebars
       const newItemHtml = addItemToList({item: newItem.item})
+      // append this new html to #new-item-container in state-all-items.handlebars
       $('#new-item-container').append(newItemHtml)
     })
     .catch(createItemFailure)
