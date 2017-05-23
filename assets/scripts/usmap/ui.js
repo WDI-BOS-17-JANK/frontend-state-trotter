@@ -34,9 +34,9 @@ const getItemsSuccess = (data, region) => {
 const onCreateItem = function (event) {
   console.log('what is store.state', store.state) // Michigan
   event.preventDefault()
-  // console.log('event.target at onCreateItem is', event.target)
+  console.log('event.target at onCreateItem is', event.target)
   const content = getFormFields(event.target)
-  // console.log('inside ui/onCreateItem and the content is', content)
+  console.log('inside ui/onCreateItem and the content is', content)
 
   const newData = {
     item: {
@@ -51,8 +51,8 @@ const onCreateItem = function (event) {
   }
 
   api.createItem(newData)
-    .then(ui.createItemSuccess)
-    .catch(ui.createItemFailure)
+    .then(createItemSuccess)
+    .catch(createItemFailure)
 }
 
 const getItemsFailure = (data) => {
@@ -60,7 +60,7 @@ const getItemsFailure = (data) => {
 }
 
 const createItemSuccess = (data) => {
-  console.log(data)
+  console.log('response is', data)
 }
 
 const createItemFailure = (data) => {

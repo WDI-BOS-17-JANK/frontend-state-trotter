@@ -2,7 +2,7 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
-const mapEvents = require('./usmap/events.js')
+
 const landingTemplate = require('./templates/landing.handlebars')
 
 // showLandingTemplate()

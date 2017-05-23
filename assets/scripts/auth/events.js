@@ -1,7 +1,7 @@
 'use strict'
-
+const mapPage = require('../templates/map.handlebars')
 const getFormFields = require(`../../../lib/get-form-fields`)
-
+const mapEvents = require('../usmap/events.js')
 const api = require('./api')
 const ui = require('./ui')
 const mainPageNav = require('../templates/main-page-nav.handlebars')
@@ -54,6 +54,8 @@ const addLandingHandlers = () => {
     console.log('store.user is ', store.user)
     if (store.user !== undefined) {
       $('#landing-view-container').html(mainPageNav)
+      $('#map-view-container').html(mapPage)
+      mapEvents.usMap()
     }
   })
   // $('#change-password').on('submit', onChangePassword)
