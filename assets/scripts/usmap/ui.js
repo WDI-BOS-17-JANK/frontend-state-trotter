@@ -20,6 +20,7 @@ const showStateView = () => {
 const showCreateform = () => {
   $('#state-view').append(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
+
 }
 
 const getItemsSuccess = (data, region) => {
@@ -34,11 +35,8 @@ const getItemsSuccess = (data, region) => {
 }
 
 const onCreateItem = function (event) {
-  console.log('what is store.state', store.state) // Michigan
   event.preventDefault()
-  console.log('event.target at onCreateItem is', event.target)
   const content = getFormFields(event.target)
-  console.log('inside ui/onCreateItem and the content is', content)
 
   const newData = {
     item: {
@@ -64,7 +62,7 @@ const getItemsFailure = (data) => {
 const createItemSuccess = (data) => {
   console.log('response is', data)
   // disappear form on sucess
-  $('#create-item').empty()
+  $('#create-item').remove()
 }
 
 const createItemFailure = (data) => {
