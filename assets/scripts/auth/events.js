@@ -56,7 +56,7 @@ const addLandingHandlers = () => {
       $('#landing-view-container').html(mainPageNav)
       $('#map-view-container').html(mapPage)
       mapEvents.myGoals()
-      mapEvents.usMap()
+      // mapEvents.usMap()
     }
   })
   // $('#change-password').on('submit', onChangePassword)

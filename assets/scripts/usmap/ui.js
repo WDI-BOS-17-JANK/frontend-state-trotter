@@ -16,6 +16,7 @@ const showStateItemCreateTemplate = require('../templates/state-item-create.hand
 // const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
 // const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
 const mapPage = require('../templates/map.handlebars')
+const allGoals = require('../templates/all-goals.handlebars')
 
 const getItemsSuccess = (data, region) => {
   // debugger
@@ -58,8 +59,20 @@ const onCreateItem = function (event) {
 
 const getmyGoalsSuccess = (data) => {
   console.log('in getmyGoalsSuccess and data is', data)
-  // console.log('data.items is ', data.items)
-  $('#map-view-container').html(mapPage({items: data.items}))
+
+  data.items.forEach((item, i) => {
+    if (i % 3 === 0) {
+      $('#goal-column-0').append(allGoals({item: item}))
+    } else if (i % 3 === 1) {
+      $('#goal-column-1').append(allGoals({item: item}))
+    } else if (i % 3 === 2) {
+      $('#goal-column-2').append(allGoals({item: item}))
+    }
+  })
+}
+
+const getmyGoalsFailure = (data) => {
+  console.error(data)
 }
 
 const getItemsFailure = (data) => {
@@ -99,5 +112,6 @@ module.exports = {
   updateItemFailure,
   destroyItemFailure,
   destroyItemSuccess,
-  getmyGoalsSuccess
+  getmyGoalsSuccess,
+  getmyGoalsFailure
 }
