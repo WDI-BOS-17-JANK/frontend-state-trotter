@@ -15,6 +15,7 @@ const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 // const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
 // const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
+const mapPage = require('../templates/map.handlebars')
 
 const getItemsSuccess = (data, region) => {
   // debugger
@@ -55,6 +56,12 @@ const onCreateItem = function (event) {
     .catch(createItemFailure)
 }
 
+const getmyGoalsSuccess = (data) => {
+  console.log('in getmyGoalsSuccess and data is', data)
+  // console.log('data.items is ', data.items)
+  $('#map-view-container').html(mapPage({items: data.items}))
+}
+
 const getItemsFailure = (data) => {
   console.error(data)
 }
@@ -91,5 +98,6 @@ module.exports = {
   updateItemSuccess,
   updateItemFailure,
   destroyItemFailure,
-  destroyItemSuccess
+  destroyItemSuccess,
+  getmyGoalsSuccess
 }

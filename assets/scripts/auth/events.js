@@ -55,6 +55,7 @@ const addLandingHandlers = () => {
     if (store.user !== undefined) {
       $('#landing-view-container').html(mainPageNav)
       $('#map-view-container').html(mapPage)
+      mapEvents.myGoals()
       mapEvents.usMap()
     }
   })
