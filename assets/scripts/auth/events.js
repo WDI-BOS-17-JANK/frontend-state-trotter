@@ -28,13 +28,6 @@ const onSignIn = function (event) { // stop here , add console to check if code 
   const data = getFormFields(this)
   api.signIn(data)
     .then(ui.signInSuccess)
-    .then(() => {
-      return $('#modal-signin').modal('hide')
-      // console.log('in landing-view-controller update')
-    })
-    .then(() => {
-      $('#landing-view-container').html(mainPageNav)
-    })
     .catch(ui.signInFailure)
 }
 
@@ -56,6 +49,9 @@ const onSignOut = function (event) {
 const addLandingHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
+  $('#modal-signin').on('hidden.bs.modal', function () {
+    $('#landing-view-container').html(mainPageNav)
+  })
   // $('#change-password').on('submit', onChangePassword)
   // $('#sign-out').on('submit', onSignOut)
 }
