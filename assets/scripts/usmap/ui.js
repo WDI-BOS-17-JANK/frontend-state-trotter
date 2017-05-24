@@ -7,27 +7,38 @@ const store = require('../store.js')
 const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
-const ui = require('./ui')
+// const ui = require('./ui')
 // const onCreateItem = require('./events')
 // const showLandingTemplate = require('../templates/landing.handlebars')
 const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
-// const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
-// const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
-const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
+const mapPage = require('../templates/map.handlebars')
+const mapEvents = require('./events')
 
 
 const showStateView = (items) => {
   const itemByState = showStateAllTemplate(items)
   $('#state-view').append(itemByState)
   createFormHandler()
+  $('#state-header').text(store.state)
+  console.log('store.state is', store.state)
+}
+
+const cancelCreate = () => {
+  $('#create-item-container').empty('')
+  // enable '+' (add new item) button once upon clicking 'cancel'
+  // $('#create-button').prop('disabled', false)
 }
 
 const showCreateform = () => {
   $('#create-item-container').append(showStateItemCreateTemplate)
+  // remove create form upon clicking 'create'
+  $('#cancel-create').on('click', cancelCreate)
+  // // disable '+' (add new item) button upon clicking
+  // $('#create-button').prop('disabled', true)
   $('#create-item').on('submit', onCreateItem)
 }
 
@@ -36,7 +47,8 @@ const createFormHandler = () => {
 }
 
 const hideMap = () => {
-  $('#map-view-container').empty()
+  // $('#map-view-container').empty()
+  $('#map-view-container').hide()
 }
 
 const getItemsSuccess = (data, region) => {
@@ -50,15 +62,13 @@ const getItemsSuccess = (data, region) => {
   // We need to pass filteredItems to showStateView rather than data.items
   showStateView({items: filteredItems})
   hideMap()
-  $('#state-header').text(store.state)
 }
 
 const getItemsFailure = (data) => {
   console.error(data)
 }
 
-
-const onCreateItem = function(event) {
+const onCreateItem = function (event) {
   event.preventDefault()
   const content = getFormFields(event.target)
 
@@ -138,11 +148,9 @@ const getmyGoalsFailure = (data) => {
   console.error(data)
 }
 
-const getItemsFailure = (data) => {
-  console.error(data)
-}
-
 const createItemSuccess = (data) => {
+  // enable '+' (add new item) button upon successful item create
+  // $('#create-button').prop('disabled', false)
   console.log('response is', data)
   // disappear form on sucess
   $('#create-item').remove()
