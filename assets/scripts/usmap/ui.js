@@ -62,7 +62,7 @@ const showStateView = (items) => {
 }
 
 const showCreateform = () => {
-  $('#create-item-container').append(showStateItemCreateTemplate)
+  $('#create-item-container').html(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
 }
 
