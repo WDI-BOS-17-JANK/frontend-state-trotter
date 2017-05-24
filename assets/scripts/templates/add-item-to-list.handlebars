@@ -1,7 +1,20 @@
-<div class="checkbox-item" data-id="{{item.id}}">
+<div class="checkbox-item">
   <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input">
         <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">{{item.title}}</span>
       </label>
+      <span>{{item.title}}</span>
+      <button
+        data-title="{{item.title}}"
+        data-category="{{item.category}}"
+        data-status="{{item.status}}"
+        data-description="{{item.description}}"
+        data-date="{{item.due_date}}"
+        data-state="{{item.state}}"
+        data-id="{{item.id}}"
+        data-location="{{item.location}}"
+        class="btn-btn-default inline edit-button"
+        type="button">
+          Edit
+      </button>
 </div>

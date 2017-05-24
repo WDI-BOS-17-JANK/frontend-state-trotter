@@ -1,12 +1,22 @@
 <!-- Empty form to create new item -->
-<form id="create-item" class="create-item" data-id="{{item.id}}">
+<form id="edit-item"
+  class="edit-item"
+  data-title="{{item.data-title}}"
+  data-category="{{item.data-category}}"
+  data-status="{{item.data-status}}"
+  data-description="{{item.data-description}}"
+  data-date="{{item.data-date}}"
+  data-state="{{item.data-state}}"
+  data-id="{{item.data-id}}"
+  data-location="{{item.data-location}}">
+
   <fieldset>
-    <input type="text" name="items[title]" placeholder="{{item.title}}">
-    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="items[due_date]" placeholder="{{item.due_date}}">
-    <input type="text" name="items[location]" placeholder="{{item.location}}">
-    <input type="text" name="items[description]" placeholder="{{item.description}}">
-    <input type="text" name="items[category]" placeholder="{{item.category}}">
-    <button data-id="{{item.id}}" class="glyphicon glyphicon-ok-circle" type="button" name="Save"></button>
+    <input class="form-control" type="text" name="items[title]" placeholder="{{item.data-title}}">
+    <input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="items[due_date]" placeholder="{{item.data-date}}">
+    <input class="form-control" type="text" name="items[location]" placeholder="{{item.data-location}}">
+    <input class="form-control" type="text" name="items[description]" placeholder="{{item.data-description}}">
+    <input class="form-control" type="text" name="items[category]" placeholder="{{item.data-category}}">
+    <button data-id="{{item.id}}" class="glyphicon glyphicon-ok-circle" type="submit" name="Submit"></button>
     <button data-id="{{item.id}}" class="glyphicon glyphicon-remove-circle" type="button" name="Cancel"></button>
   </fieldset>
 </form>
