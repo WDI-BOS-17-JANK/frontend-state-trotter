@@ -4,6 +4,7 @@
 // const flashcardui = require('../flashcard/ui')
 
 const store = require('../store.js')
+const landingTemplate = require('../templates/landing.handlebars')
 
 const signUpSuccess = (response) => { // argument can be (response) or something too. Just an argument name
   // $('.signup-status-message').text('Successfully signed up. Please wait for page to load.')
@@ -43,21 +44,26 @@ const changePasswordFailure = () => {
 }
 
 const signOutSuccess = () => {
-  $('.header').fadeIn()
-  $('.flashcard-container').hide()
-  $('.flashcard-container-header').hide()
-  $('footer').hide()
-  $('#view-all').hide()
+  console.log('sign out successful')
+  // $('.header').fadeIn()
+  // $('.flashcard-container').hide()
+  // $('.flashcard-container-header').hide()
+  // $('footer').hide()
+  // $('#view-all').hide()
   document.getElementById('change-password').reset()
-  $('.change-pw-status-message').text('')
-
-  if ($('input[name=hamburger-menu').is(':checked')) {
-    $('input[name=hamburger-menu]').click()
-  }
+  // $('.change-pw-status-message').text('')
+  //
+  // if ($('input[name=hamburger-menu').is(':checked')) {
+  //   $('input[name=hamburger-menu]').click()
+  // }
   // scroll back to top of landing page upon successful signout
-  $(document).ready(function () {
-    window.scrollTo(0, 0)
-  })
+  // $(document).ready(function () {
+  //   window.scrollTo(0, 0)
+  // })
+  $('#landing-view-container').html(landingTemplate)
+  $('#main-view-container').empty()
+  $('#nav-container').empty()
+  $('.jqvmap-label').empty()
 
   store.user = null // only have one person signed in in a givne session, one browser
 }
