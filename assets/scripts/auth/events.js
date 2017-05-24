@@ -42,6 +42,7 @@ const onChangePassword = function (event) {
 
 const onSignOut = function (event) {
   event.preventDefault()
+  console.log('in onSignOut')
   api.signOut()
     .then(ui.signOutSuccess)
     .catch(ui.signOutFailure)
@@ -55,6 +56,7 @@ const addLandingHandlers = () => {
     if (store.user !== undefined) {
       $('#landing-view-container').html('')
       $('#main-view-container').html(mainPageNav)
+      $('#sign-out').on('submit', onSignOut)
       $('#map-view-container').html(mapPage)
       mapEvents.myGoals()
 
