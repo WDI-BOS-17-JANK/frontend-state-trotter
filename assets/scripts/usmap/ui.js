@@ -8,16 +8,15 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
 const ui = require('./ui')
-// const onCreateItem = require('./events')
-// const showLandingTemplate = require('../templates/landing.handlebars')
+
 const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
-// const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
-// const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
+
 const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
+
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
 
 const formatDate = function (date) {
@@ -28,7 +27,8 @@ const formatDate = function (date) {
   return month + '/' + day + '/' + year
 }
 
-// let currentItems = {}
+
+const editFormTemplate = require('../templates/state-item-update.handlebars')
 
 const showStateView = (items) => {
   console.log('store.currentItems in showStateView is', store.currentItems)
@@ -82,13 +82,67 @@ const showCreateform = () => {
   $('#create-item').on('submit', onCreateItem)
   $('#cancel-create').on('click', cancelCreate)
 }
+// swap in the edit form template
+const showEditForm = (event) => {
+  const attributes = [
+    'data-title',
+    'data-category',
+    'data-state',
+    'data-status',
+    'data-description',
+    'data-location',
+    'data-id',
+    'data-date'
+  ]
+  const placeHolders = getAttribute(event.target, attributes)
+  const date = new Date(placeHolders['data-date'])
+  const month = date.getUTCMonth() + 1
+  const day = date.getUTCDate()
+  const year = date.getUTCFullYear()
+  const forDisplay = month + '/' + day + '/' + year
+  placeHolders['data-date'] = forDisplay
+  const editFormHtml = editFormTemplate({item: placeHolders})
+  $('#create-item-container').html(editFormHtml)
+  editHandlers()
+}
+
+const editHandlers = () => {
+  $('#edit-item').on('submit', onSaveEdit)
+}
+
+const onSaveEdit = (event) => {
+  const id = $(event.target).attr('data-id')
+  const newContent = getFormFields(event.target)
+  event.preventDefault()
+  api.saveEdit(newContent, id)
+    .then(saveEditSuccess)
+    .catch(saveEditFailure)
+}
+
+const saveEditSuccess = (data) => {
+  console.log('save edit success', data)
+}
+
+const saveEditFailure = (error) => {
+  console.error(error)
+}
 
 const createFormHandler = () => {
   $('#create-button').on('click', showCreateform)
+  $('.edit-button').on('click', showEditForm)
 }
 
 const hideMap = () => {
   $('#map-view-container').empty()
+}
+
+const getAttribute = ($button, array) => {
+  const placeHolders = {}
+  array.forEach((e) => {
+    const val = $($button).attr(e)
+    placeHolders[e] = val
+  })
+  return placeHolders
 }
 
 const getItemsSuccess = (data, region) => {
@@ -151,7 +205,6 @@ const getmyGoalsSuccess = (data) => {
     return item.status === 'incomplete'
   })
   console.log('incompleteItems is', incompleteItems)
-
 
   if (incompleteItems.length > 0) {
     const nextIncompleteItem = incompleteItems[0]
@@ -225,7 +278,7 @@ module.exports = {
   updateItemFailure,
   destroyItemFailure,
   destroyItemSuccess,
+  createFormHandler,
   getmyGoalsSuccess,
-  getmyGoalsFailure,
-  createFormHandler
+  getmyGoalsFailure
 }
