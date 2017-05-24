@@ -44,15 +44,6 @@ const myGoals = function () {
     .catch(ui.getmyGoalsFailure)
 }
 
-// const onCreateItem = function (event) {
-//   console.log('inside events/onCreateItem')
-//   event.preventDefault()
-//   const content = getFormFields(event.target)
-//   api.createItem(content)
-//     .then(ui.createItemSuccess)
-//     .catch(ui.createItemFailure)
-// }
-
 const onUpdateItem = function (event) {
   const content = getFormFields(event.target)
   event.preventDefault()
