@@ -92,8 +92,7 @@ const getItemsFailure = (data) => {
   console.error(data)
 }
 
-
-const onCreateItem = function(event) {
+const onCreateItem = function (event) {
   event.preventDefault()
   const content = getFormFields(event.target)
 
@@ -102,7 +101,7 @@ const onCreateItem = function(event) {
       description: content.item.description,
       due_date: content.item.due_date,
       state: store.state,
-      status: content.item.status,
+      status: 'incomplete',
       title: content.item.title,
       category: content.item.category,
       location: content.item.location

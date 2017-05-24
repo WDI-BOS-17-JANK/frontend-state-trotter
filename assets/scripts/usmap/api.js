@@ -27,7 +27,7 @@ const createItem = function (content) {
         description: content.item.description,
         due_date: content.item.due_date,
         state: content.item.state,
-        status: content.item.status,
+        status: 'incomplete',
         title: content.item.title,
         category: content.item.category,
         location: content.item.location
