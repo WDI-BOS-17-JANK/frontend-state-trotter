@@ -7,7 +7,6 @@ const store = require('../store.js')
 const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
-const ui = require('./ui')
 
 const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
@@ -95,12 +94,15 @@ const onSaveEdit = (event) => {
   const newContent = getFormFields(event.target)
   event.preventDefault()
   api.saveEdit(newContent, id)
-    .then(saveEditSuccess)
+    .then((data) => {
+      api.getOneItem(id)
+    })
     .catch(saveEditFailure)
+    .then(getOneItemSuccess)
 }
 
-const saveEditSuccess = (data) => {
-  console.log('save edit success', data)
+const getOneItemSuccess = (data) => {
+  console.log(data)
 }
 
 const saveEditFailure = (error) => {
