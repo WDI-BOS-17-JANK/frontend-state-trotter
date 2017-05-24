@@ -16,6 +16,7 @@ const showStateItemCreateTemplate = require('../templates/state-item-create.hand
 const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
+
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
 
 const formatDate = function (date) {
@@ -25,6 +26,8 @@ const formatDate = function (date) {
   const year = d.getUTCFullYear()
   return month + '/' + day + '/' + year
 }
+
+const editFormTemplate = require('../templates/state-item-update.handlebars')
 
 const showStateView = (items) => {
   const itemByState = showStateAllTemplate(items)
@@ -59,13 +62,45 @@ const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
 }
+// swap in the edit form template
+const showEditForm = (event) => {
+  const attributes = [
+    'data-title',
+    'data-category',
+    'data-state',
+    'data-status',
+    'data-description',
+    'data-location',
+    'data-id',
+    'data-date'
+  ]
+  const placeHolders = getAttribute(event.target, attributes)
+  const date = new Date(placeHolders['data-date'])
+  const month = date.getUTCMonth() + 1
+  const day = date.getUTCDate()
+  const year = date.getUTCFullYear()
+  const forDisplay = month + '/' + day + '/' + year
+  placeHolders['data-date'] = forDisplay
+  const editFormHtml = editFormTemplate({item: placeHolders})
+  $('#create-item-container').html(editFormHtml)
+}
 
 const createFormHandler = () => {
   $('#create-button').on('click', showCreateform)
+  $('.edit-button').on('click', showEditForm)
 }
 
 const hideMap = () => {
   $('#map-view-container').empty()
+}
+
+const getAttribute = ($button, array) => {
+  const placeHolders = {}
+  array.forEach((e) => {
+    const val = $($button).attr(e)
+    placeHolders[e] = val
+  })
+  return placeHolders
 }
 
 const getItemsSuccess = (data, region) => {
