@@ -45,11 +45,16 @@ const showStateView = (items) => {
   })
   console.log('incompleteItems is', incompleteItems)
 
-  const nextIncompleteItem = incompleteItems[0]
-  nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
-  nextIncompleteItem.createdAt = formatDate(nextIncompleteItem.createdAt)
-  console.log('nextIncompleteItem is', nextIncompleteItem)
-  $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
+  if (incompleteItems.length > 0) {
+    const nextIncompleteItem = incompleteItems[0]
+    nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
+    nextIncompleteItem.createdAt = formatDate(nextIncompleteItem.createdAt)
+    console.log('nextIncompleteItem is', nextIncompleteItem)
+    $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
+    console.log('no incomplete items')
+  } else {
+    $('#create-item-container').append(showStateItemCreateTemplate)
+  }
   // pass in default state to state-default handlebars and then append to div id="create-item-container"
 //
 //
