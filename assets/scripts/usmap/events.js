@@ -6,6 +6,13 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 
+const deleteItem = function (event) {
+  console.log('in delete item and event.target is ', $(event.target).attr('data-id'))
+  console.log('in delete item and region is ', $(event.target).attr('data-state'))
+  const id = $(event.target).attr('data-id')
+  const region = $(event.target).attr('data-state')
+  onDestroyItem(id, region)
+}
 
 const showSelectedItem = (event) => {
   console.log('inside showSelectedItem and event is', event.target)
@@ -35,8 +42,8 @@ const goBacktoMap = () => {
 }
 
 const onGetItems = function (element, code, region) {
-  event.preventDefault()
-  console.log('Starting onGetItems!')
+  if (event) { event.preventDefault() }
+  console.log('Starting onGetItems and region is ', region)
   api.getItems()
     .then((data) => {
       ui.getItemsSuccess(data, region)
@@ -46,6 +53,10 @@ const onGetItems = function (element, code, region) {
     })
     .then(() => {
       $('#back-to-map-button').on('click', goBacktoMap)
+    })
+    .then(() => {
+      $('.delete-button').off('click', deleteItem)
+      $('.delete-button').on('click', deleteItem)
     })
     .catch(ui.getItemsFailure)
 }
@@ -63,7 +74,6 @@ const myGoals = function () {
 const onShowItem = function (element, code, region) {
   event.preventDefault()
   const item = getFormFields(event.target).item
-
   api.showItem(item.id)
       .then(ui.showItemSuccess)
       .then((data) => {
@@ -81,11 +91,14 @@ const onUpdateItem = function (event) {
     .catch(ui.updateItemFailure)
 }
 
-const onDestroyItem = function (event) {
-  const content = getFormFields(event.target)
+const onDestroyItem = function (id, region) {
+  // const content = getFormFields(event.target)
   event.preventDefault()
-  api.destroyItem(content)
+  api.destroyItem(id)
     .then(ui.destroyItemSuccess)
+    .then(() => {
+      onGetItems(1, 1, region)
+    })
     .catch(ui.destroyItemFailure)
 }
 

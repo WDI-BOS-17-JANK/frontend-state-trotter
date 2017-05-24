@@ -66,10 +66,10 @@ const updateItem = function (content) {
   })
 }
 
-const destroyItem = function (content) {
+const destroyItem = function (id) {
   return $.ajax({
     method: 'DELETE',
-    url: config.apiOrigin + '/items/' + content.item.id,
+    url: config.apiOrigin + '/items/' + id,
     headers: {
       Authorization: 'Token token=' + store.user.token
     }
