@@ -7,7 +7,7 @@ const store = require('../store.js')
 const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
-const ui = require('./ui')
+// const ui = require('./ui')
 // const onCreateItem = require('./events')
 // const showLandingTemplate = require('../templates/landing.handlebars')
 const addItemToList = require('../templates/add-item-to-list.handlebars')
@@ -15,10 +15,11 @@ const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 // const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
 // const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
-const mapPage = require('../templates/map.handlebars')
+// const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
+const backToMapTemplate = require('../templates/back-to-map.handlebars')
 
 const formatDate = function (date) {
   const d = new Date(date)
@@ -77,6 +78,16 @@ const cancelCreate = () => {
   // enable '+' (add new item) button once upon clicking 'cancel'
 }
 
+// const goBacktoMap = () => {
+//   // alert('inside goBacktoMap')
+//   // $('#map-view-container').html(mapPage)
+//   // console.log('mapEvents is', mapEvents)
+//   // mapEvents.usMap()
+//   $('#back-to-map-container').empty()
+//   $('#state-view').empty()
+//   $('#map-view-container').fadeIn()
+// }
+
 const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
@@ -88,7 +99,7 @@ const createFormHandler = () => {
 }
 
 const hideMap = () => {
-  $('#map-view-container').empty()
+  $('#map-view-container').hide()
 }
 
 const getItemsSuccess = (data, region) => {
@@ -103,6 +114,8 @@ const getItemsSuccess = (data, region) => {
   showStateView({items: filteredItems})
   hideMap()
   $('#state-header').text(store.state)
+  $('#back-to-map-container').html(backToMapTemplate)
+  // $('#back-to-map-button').on('click', goBacktoMap)
 }
 
 const getItemsFailure = (data) => {
@@ -152,14 +165,13 @@ const getmyGoalsSuccess = (data) => {
   })
   console.log('incompleteItems is', incompleteItems)
 
-
   if (incompleteItems.length > 0) {
     const nextIncompleteItem = incompleteItems[0]
     console.log('nextIncompleteItem is', nextIncompleteItem)
 
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
-    $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
+    $('#next-goal').html(nextGoal({item: nextIncompleteItem}))
 
     sortedData.forEach((item, i) => {
       if (i % 3 === 0) {
