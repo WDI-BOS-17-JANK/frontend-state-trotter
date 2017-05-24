@@ -55,10 +55,6 @@ const showStateView = (items) => {
   } else {
     showCreateform()
   }
-  // pass in default state to state-default handlebars and then append to div id="create-item-container"
-//
-//
-//
 }
 
 const showCreateform = () => {
@@ -135,28 +131,33 @@ const getmyGoalsSuccess = (data) => {
   })
   console.log('incompleteItems is', incompleteItems)
 
-  const nextIncompleteItem = incompleteItems[0]
-  console.log('nextIncompleteItem is', nextIncompleteItem)
 
-  nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
+  if (incompleteItems.length > 0) {
+    const nextIncompleteItem = incompleteItems[0]
+    console.log('nextIncompleteItem is', nextIncompleteItem)
 
-  $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
+    nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
-  sortedData.forEach((item, i) => {
-    if (i % 3 === 0) {
-      $('#goal-column-0').append(allGoals({
-        item: item
-      }))
-    } else if (i % 3 === 1) {
-      $('#goal-column-1').append(allGoals({
-        item: item
-      }))
-    } else if (i % 3 === 2) {
-      $('#goal-column-2').append(allGoals({
-        item: item
-      }))
-    }
-  })
+    $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
+
+    sortedData.forEach((item, i) => {
+      if (i % 3 === 0) {
+        $('#goal-column-0').append(allGoals({
+          item: item
+        }))
+      } else if (i % 3 === 1) {
+        $('#goal-column-1').append(allGoals({
+          item: item
+        }))
+      } else if (i % 3 === 2) {
+        $('#goal-column-2').append(allGoals({
+          item: item
+        }))
+      }
+    })
+  } else {
+    $('#next-goal').text('Add some goals before you sign out!')
+  }
 }
 
 const getmyGoalsFailure = (data) => {
