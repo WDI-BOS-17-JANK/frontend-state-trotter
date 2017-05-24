@@ -4,7 +4,7 @@
 // const flashcardui = require('../flashcard/ui')
 
 const store = require('../store.js')
-const landingTemplate = require('../templates/landing.handlebars')
+
 
 const signUpSuccess = (response) => { // argument can be (response) or something too. Just an argument name
   // $('.signup-status-message').text('Successfully signed up. Please wait for page to load.')
@@ -50,7 +50,7 @@ const signOutSuccess = () => {
   // $('.flashcard-container-header').hide()
   // $('footer').hide()
   // $('#view-all').hide()
-  document.getElementById('change-password').reset()
+  // document.getElementById('change-password').reset()
   // $('.change-pw-status-message').text('')
   //
   // if ($('input[name=hamburger-menu').is(':checked')) {
@@ -60,11 +60,6 @@ const signOutSuccess = () => {
   // $(document).ready(function () {
   //   window.scrollTo(0, 0)
   // })
-  $('#landing-view-container').html(landingTemplate)
-  $('#main-view-container').empty()
-  $('#nav-container').empty()
-  $('.jqvmap-label').empty()
-
   store.user = null // only have one person signed in in a givne session, one browser
 }
 

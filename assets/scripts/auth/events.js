@@ -6,6 +6,7 @@ const api = require('./api')
 const ui = require('./ui')
 const mainPageNav = require('../templates/main-page-nav.handlebars')
 const store = require('../store.js')
+const landingTemplate = require('../templates/landing.handlebars')
 // const board = require('../board')
 
 const onSignUp = function (event) {
@@ -45,6 +46,11 @@ const onSignOut = function (event) {
   console.log('in onSignOut')
   api.signOut()
     .then(ui.signOutSuccess)
+    .then($('#landing-view-container').html(landingTemplate))
+    .then($('#main-view-container').html(''))
+    .then($('#nav-container').html(''))
+    .then($('.jqvmap-label').html(''))
+    .then(addLandingHandlers)
     .catch(ui.signOutFailure)
 }
 
