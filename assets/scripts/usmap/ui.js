@@ -30,20 +30,17 @@ const editFormTemplate = require('../templates/state-item-update.handlebars')
 
 const showStateView = (items) => {
   console.log('store.currentItems in showStateView is', store.currentItems)
-  // store items in store.currentItems object, to be used in createItemSuccess
   store.currentItems = items
-  // currentItems = items
-  const itemByState = showStateAllTemplate(items)
-  $('#state-view').html(itemByState)
-  createFormHandler()
-  console.log('in showStateView and items is ', items)
-
   const sortedData = items.items.sort(function (a, b) {
     a = new Date(a.due_date)
     b = new Date(b.due_date)
     return a > b ? 1 : a < b ? -1 : 0
   })
-
+  const sortedDataObject = {items: sortedData}
+  const itemByState = showStateAllTemplate(sortedDataObject)
+  $('#state-view').html(itemByState)
+  createFormHandler()
+  console.log('JB: sortedData: ', sortedData)
   const incompleteItems = sortedData.filter((item) => {
     return item.status === 'incomplete'
   })
