@@ -35,7 +35,9 @@ const onSignIn = function (event) { // stop here , add console to check if code 
 
 const onChangePassword = function (event) {
   event.preventDefault()
+  console.log('in onChangePassword')
   const data = getFormFields(event.target)
+  console.log('in onChangePassword and the data is: ', data)
   api.changePassword(data)
     .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
@@ -63,6 +65,7 @@ const addLandingHandlers = () => {
       $('#landing-view-container').html('')
       $('#main-view-container').html(mainPageNav)
       $('#sign-out').on('submit', onSignOut)
+      $('#change-password').on('submit', onChangePassword)
       $('#map-view-container').html(mapPage)
       mapEvents.myGoals()
 
