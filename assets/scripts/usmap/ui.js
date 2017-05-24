@@ -17,7 +17,6 @@ const nextGoal = require('../templates/next-goal.handlebars')
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
 const backToMapTemplate = require('../templates/back-to-map.handlebars')
 
-
 const formatDate = function (date) {
   const d = new Date(date)
   const month = d.getUTCMonth() + 1
@@ -40,7 +39,6 @@ const showStateView = (items) => {
   const itemByState = showStateAllTemplate(sortedDataObject)
   $('#state-view').html(itemByState)
   createFormHandler()
-  console.log('JB: sortedData: ', sortedData)
   const incompleteItems = sortedData.filter((item) => {
     return item.status === 'incomplete'
   })
@@ -250,7 +248,6 @@ const getmyGoalsSuccess = (data) => {
   }
 }
 
-
 const getmyGoalsFailure = (data) => {
   console.error(data)
 }
@@ -290,7 +287,7 @@ const updateItemFailure = (data) => {
 }
 
 const destroyItemSuccess = (data) => {
-  console.log(data)
+  console.log('successfully destroyed item')
 }
 
 const destroyItemFailure = (data) => {
