@@ -1,6 +1,5 @@
 <!-- Empty form to create new item -->
 <form id="create-item" class="create-item" data-id="{{item}}">
-  <fieldset>
     <input class="form-control" type="text" name="item[title]" placeholder="Goal">
     <input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="item[due_date]" placeholder="Due date">
     <!-- <input type="text" name="item[state]" placeholder="State"> -->
@@ -11,5 +10,4 @@
     <!-- <button data-id="{{item.id}}" class="glyphicon glyphicon-ok-circle" type="button" name="Add">Add</button> -->
     <input class="form-control" class="glyphicon glyphicon-ok-circle" data-id="{{item.id}}" type="submit" name="Submit" value="Create">
     <button data-id="{{item.id}}" type="button" name="Cancel">Cancel</button>
-  </fieldset>
 </form>

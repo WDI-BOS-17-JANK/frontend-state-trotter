@@ -83,6 +83,28 @@ const showEditForm = (event) => {
   placeHolders['data-date'] = forDisplay
   const editFormHtml = editFormTemplate({item: placeHolders})
   $('#create-item-container').html(editFormHtml)
+  editHandlers()
+}
+
+const editHandlers = () => {
+  $('#edit-item').on('submit', onSaveEdit)
+}
+
+const onSaveEdit = (event) => {
+  const id = $(event.target).attr('data-id')
+  const newContent = getFormFields(event.target)
+  event.preventDefault()
+  api.saveEdit(newContent, id)
+    .then(saveEditSuccess)
+    .catch(saveEditFailure)
+}
+
+const saveEditSuccess = (data) => {
+  console.log('save edit success', data)
+}
+
+const saveEditFailure = (error) => {
+  console.error(error)
 }
 
 const createFormHandler = () => {
