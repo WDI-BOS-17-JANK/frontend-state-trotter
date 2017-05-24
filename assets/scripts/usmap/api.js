@@ -14,6 +14,16 @@ const getItems = function () {
   })
 }
 
+const showItem = function (id) {
+  return $.ajax({
+    method: 'GET',
+    url: config.apiOrigin + '/items/' + id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const createItem = function (content) {
   console.log('inside api/createItem and the content is', content)
   return $.ajax({
@@ -88,6 +98,7 @@ const saveEdit = function (newContent, id) {
 
 module.exports = {
   getItems,
+  showItem,
   createItem,
   updateItem,
   destroyItem,

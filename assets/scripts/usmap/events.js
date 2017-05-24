@@ -25,6 +25,18 @@ const myGoals = function () {
     .catch(ui.getmyGoalsFailure)
 }
 
+const onShowItem = function (element, code, region) {
+  event.preventDefault()
+  const item = getFormFields(event.target).item
+
+  api.showItem(item.id)
+      .then(ui.showItemSuccess)
+      .then((data) => {
+        ui.showItemSuccess(data, region)
+      })
+      .catch(ui.showItemFailure)
+}
+
 const onUpdateItem = function (event) {
   const content = getFormFields(event.target)
   event.preventDefault()
@@ -75,6 +87,7 @@ module.exports = {
   addHandlers,
   usMap,
   myGoals,
+  onShowItem,
   // onCreateItem,
   onUpdateItem
 }
