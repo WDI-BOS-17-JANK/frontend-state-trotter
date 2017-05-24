@@ -1,5 +1,10 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'reset';
+
+//////////////////////////////
+// Global
+//////////////////////////////
 
 .text-align-center {
   text-align: center;
@@ -20,3 +25,7 @@ footer {
 .status-message {
   text-align: center;
 }
+
+//////////////////////////////
+// End Global
+//////////////////////////////
