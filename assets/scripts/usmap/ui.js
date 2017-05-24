@@ -53,7 +53,7 @@ const showStateView = (items) => {
     $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
     console.log('no incomplete items')
   } else {
-    $('#create-item-container').append(showStateItemCreateTemplate)
+    showCreateform()
   }
   // pass in default state to state-default handlebars and then append to div id="create-item-container"
 //
