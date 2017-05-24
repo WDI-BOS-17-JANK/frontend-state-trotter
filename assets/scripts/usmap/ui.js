@@ -62,9 +62,14 @@ const showStateView = (items) => {
 }
 
 const cancelCreate = () => {
-  console.log('store in cancelCreate is', store)
-  console.log('store.currentItems in cancelCreate is', store.currentItems)
+  // console.log('store in cancelCreate is', store)
+  // console.log('store.currentItems in cancelCreate is', store.currentItems)
   // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
+  showStateView(store.currentItems)
+  $('#state-header').text(store.state)
+}
+
+const cancelUpdate = () => {
   showStateView(store.currentItems)
   $('#state-header').text(store.state)
 }
@@ -96,6 +101,7 @@ const showEditForm = (event) => {
   const editFormHtml = editFormTemplate({item: placeHolders})
   $('#create-item-container').html(editFormHtml)
   editHandlers()
+  $('#cancel-update').on('click', cancelUpdate)
 }
 
 const editHandlers = () => {
