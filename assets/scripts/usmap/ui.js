@@ -28,9 +28,15 @@ const formatDate = function (date) {
   return month + '/' + day + '/' + year
 }
 
+// let currentItems = {}
+
 const showStateView = (items) => {
+  console.log('store.currentItems in showStateView is', store.currentItems)
+  // store items in store.currentItems object, to be used in createItemSuccess
+  store.currentItems = items
+  // currentItems = items
   const itemByState = showStateAllTemplate(items)
-  $('#state-view').append(itemByState)
+  $('#state-view').html(itemByState)
   createFormHandler()
   console.log('in showStateView and items is ', items)
 
@@ -57,9 +63,24 @@ const showStateView = (items) => {
   }
 }
 
+const cancelCreate = () => {
+  // alert('inside cancelCreate!')
+  // $('#map-view-container').html(mapPage)
+  // console.log('mapEvents is', mapEvents)
+  // mapEvents.usMap()
+  console.log('store in cancelCreate is', store)
+  console.log('store.currentItems in cancelCreate is', store.currentItems)
+  // debugger
+
+  // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
+  showStateView(store.currentItems)
+  // enable '+' (add new item) button once upon clicking 'cancel'
+}
+
 const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
+  $('#cancel-create').on('click', cancelCreate)
 }
 
 const createFormHandler = () => {
@@ -165,8 +186,12 @@ const getmyGoalsFailure = (data) => {
 }
 
 const createItemSuccess = (data) => {
-  console.log('response is', data)
-  // disappear form on sucess
+  // console.log('data in createItemSuccess is', data)
+  // console.log('store.currentItems before is', store.currentItems)
+  // Push newly created item into the currentItems object. Now it is an object of all items (in an array), including new ones.
+  store.currentItems.items.push(data.item)
+  // console.log('store.currentItems after is', store.currentItems)
+  // form disappears on sucsess
   $('#create-item').remove()
   return data
 }
