@@ -85,7 +85,7 @@ const saveEdit = function (newContent, id) {
     }
   })
 }
-const getOneItem = function (id) {
+const updateAfterEdit = function (id) {
   return $.ajax({
     method: 'GET',
     url: config.apiOrigin + '/items/' + id,
@@ -101,5 +101,5 @@ module.exports = {
   updateItem,
   destroyItem,
   saveEdit,
-  getOneItem
+  updateAfterEdit
 }

@@ -109,22 +109,37 @@ const onSaveEdit = (event) => {
   event.preventDefault()
   api.saveEdit(newContent, id)
     .then((data) => {
-      api.getOneItem(id)
+      return api.updateAfterEdit(id)
     })
     .catch(saveEditFailure)
-    .then(getOneItemSuccess)
+    .then(updateAfterEditSuccess)
+    .catch(updateAfterEditFailure)
 }
 
-const getOneItemSuccess = (data) => {
-  console.log(data)
+const updateAfterEditSuccess = (data) => {
+  const $list = $('#item-list').children('.checkbox-item').children('button')
+  const $buttonToUpdate = $list.filter((x, e, a) => {
+    const current = $(e).attr('data-id')
+
+    return current === data.item._id
+  })
+  const addItemToListHtml = addItemToList({item: data.item})
+  const $checkBoxToUpdate = $buttonToUpdate.parents('.checkbox-item')
+  $($checkBoxToUpdate).replaceWith(addItemToListHtml)
+  createFormHandler()
 }
 
+const updateAfterEditFailure = (error) => {
+  console.error(error)
+}
 const saveEditFailure = (error) => {
   console.error(error)
 }
 
 const createFormHandler = () => {
+  $('#create-button').off('click', showCreateform)
   $('#create-button').on('click', showCreateform)
+  $('.edit-button').off('click', showEditForm)
   $('.edit-button').on('click', showEditForm)
 }
 
