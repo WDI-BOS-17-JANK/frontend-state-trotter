@@ -6,6 +6,18 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 
+
+const showSelectedItem = (event) => {
+  console.log('inside showSelectedItem and event is', event.target)
+  // on click of the display button ('#display-button'),
+  // display the state-default items handlebar
+  const id = $(event.target).attr('data-id')
+  console.log('id is ', id)
+  api.showItem(id)
+  .then(ui.getItemSuccess)
+  .catch(ui.getItemsFailure)
+}
+
 const goBacktoMap = () => {
   // alert('inside goBacktoMap')
   // $('#map-view-container').html(mapPage)
@@ -24,9 +36,13 @@ const goBacktoMap = () => {
 
 const onGetItems = function (element, code, region) {
   event.preventDefault()
+  console.log('Starting onGetItems!')
   api.getItems()
     .then((data) => {
       ui.getItemsSuccess(data, region)
+    })
+    .then(() => {
+      $('.display-details-button').on('click', showSelectedItem)
     })
     .then(() => {
       $('#back-to-map-button').on('click', goBacktoMap)
@@ -42,6 +58,18 @@ const myGoals = function () {
     })
     .then(usMap)
     .catch(ui.getmyGoalsFailure)
+}
+
+const onShowItem = function (element, code, region) {
+  event.preventDefault()
+  const item = getFormFields(event.target).item
+
+  api.showItem(item.id)
+      .then(ui.showItemSuccess)
+      .then((data) => {
+        ui.showItemSuccess(data, region)
+      })
+      .catch(ui.showItemFailure)
 }
 
 const onUpdateItem = function (event) {
@@ -95,6 +123,7 @@ module.exports = {
   addHandlers,
   usMap,
   myGoals,
+  onShowItem,
   // onCreateItem,
   onUpdateItem
 }

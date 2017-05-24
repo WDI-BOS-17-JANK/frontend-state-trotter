@@ -14,9 +14,9 @@ const showStateItemCreateTemplate = require('../templates/state-item-create.hand
 
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
-
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
 const backToMapTemplate = require('../templates/back-to-map.handlebars')
+
 
 const formatDate = function (date) {
   const d = new Date(date)
@@ -166,6 +166,7 @@ const getItemsSuccess = (data, region) => {
   // We need to pass filteredItems to showStateView rather than data.items
   showStateView({items: filteredItems})
   hideMap()
+
   $('#state-header').text(store.state)
   $('#back-to-map-container').html(backToMapTemplate)
   // $('#back-to-map-button').on('click', goBacktoMap)
@@ -246,6 +247,7 @@ const getmyGoalsSuccess = (data) => {
   }
 }
 
+
 const getmyGoalsFailure = (data) => {
   console.error(data)
 }
@@ -262,6 +264,17 @@ const createItemSuccess = (data) => {
 }
 
 const createItemFailure = (data) => {
+  console.error(data)
+}
+
+const getItemSuccess = (data) => {
+  console.log(data)
+  data.item.due_date = formatDate(data.item.due_date)
+  data.item.createdAt = formatDate(data.item.createdAt)
+  $('#create-item-container').html(stateDefaultItem({item: data.item}))
+}
+
+const getItemFailure = (data) => {
   console.error(data)
 }
 
@@ -286,6 +299,8 @@ module.exports = {
   getItemsFailure,
   createItemSuccess,
   createItemFailure,
+  getItemSuccess,
+  getItemFailure,
   updateItemSuccess,
   updateItemFailure,
   destroyItemFailure,

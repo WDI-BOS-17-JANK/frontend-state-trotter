@@ -11,6 +11,19 @@
             </label>
             <span>{{item.title}}</span>
           <button
+              data-title="{{item.title}}"
+              data-category="{{item.category}}"
+              data-status="{{item.status}}"
+              data-description="{{item.description}}"
+              data-date="{{item.due_date}}"
+              data-state="{{item.state}}"
+              data-id="{{item.id}}"
+              data-location="{{item.location}}"
+              class="btn-btn-default inline display-details-button"
+              type="button">
+                Details
+          </button>
+          <button
             data-title="{{item.title}}"
             data-category="{{item.category}}"
             data-status="{{item.status}}"
@@ -24,7 +37,6 @@
               Edit
           </button>
       </div>
-
 
 
     {{/each}}
