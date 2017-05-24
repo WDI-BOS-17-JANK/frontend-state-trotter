@@ -6,13 +6,30 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 
+const showSelectedItem = (event) => {
+  console.log('inside showSelectedItem and event is', event.target)
+  // on click of the display button ('#display-button'),
+  // display the state-default items handlebar
+  const id = $(event.target).attr('data-id')
+  console.log('id is ', id)
+  api.showItem(id)
+  .then(ui.getItemSuccess)
+  .catch(ui.getItemsFailure)
+}
+
 const onGetItems = function (element, code, region) {
   event.preventDefault()
+  console.log('Starting onGetItems!')
   api.getItems()
     .then((data) => {
       ui.getItemsSuccess(data, region)
     })
+    .then(() => {
+      $('.display-details-button').on('click', showSelectedItem)
+    })
+    .then(console.log('On Get Items complete!'))
     .catch(ui.getItemsFailure)
+  console.log('On Get Items complete!2')
 }
 
 const myGoals = function () {

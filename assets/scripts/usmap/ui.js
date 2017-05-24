@@ -16,8 +16,8 @@ const showStateItemCreateTemplate = require('../templates/state-item-create.hand
 const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
-
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
+
 
 const formatDate = function (date) {
   const d = new Date(date)
@@ -136,6 +136,7 @@ const getItemsSuccess = (data, region) => {
   // We need to pass filteredItems to showStateView rather than data.items
   showStateView({items: filteredItems})
   hideMap()
+
   $('#state-header').text(store.state)
 }
 
@@ -215,40 +216,6 @@ const getmyGoalsSuccess = (data) => {
 }
 
 
-
-const selectedItem = () => {
-    $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
-}
-
-
-
-const showUpdateFields = (event) => {
-  event.preventDefault()
-  const currentPostId = $(event.target).attr('data-id')
-  $('#update-post-input-id').val(currentPostId)
-  const currentPostArray = store.moviePosts.filter((moviePost) => {
-    return String(moviePost.id) === currentPostId
-  })
-  const currentPost = currentPostArray[0]
-
-// UPDATE FIELD VALS
-  $('#update-post-input-movie-title').val(currentPost.title)
-  $('#update-post-input-director').val(currentPost.director)
-  $('#update-post-input-comment').val(currentPost.comment)
-
-// SHOW / HIDE
-  $('.update-field').show()
-  $('#update-id-div').hide()
-
-  $('#update-movie-post-input-forms').on('submit', updateMoviePost)
-  $('#cancel-update-submit-button').on('click', () => { $('.update-field').hide() })
-}
-
-
-
-
-
-
 const getmyGoalsFailure = (data) => {
   console.error(data)
 }
@@ -264,14 +231,16 @@ const createItemFailure = (data) => {
   console.error(data)
 }
 
-// const showItemSuccess = (data) => {
-//
-//   console.log(data)
-// }
-//
-// const showItemFailure = (data) => {
-//   console.error(data)
-// }
+const getItemSuccess = (data) => {
+  console.log(data)
+  data.item.due_date = formatDate(data.item.due_date)
+  data.item.createdAt = formatDate(data.item.createdAt)
+  $('#create-item-container').html(stateDefaultItem({item: data.item}))
+}
+
+const getItemFailure = (data) => {
+  console.error(data)
+}
 
 const updateItemSuccess = (data) => {
   console.log(data)
@@ -294,8 +263,8 @@ module.exports = {
   getItemsFailure,
   createItemSuccess,
   createItemFailure,
-  // showItemSuccess,
-  // showItemFailure,
+  getItemSuccess,
+  getItemFailure,
   updateItemSuccess,
   updateItemFailure,
   destroyItemFailure,
