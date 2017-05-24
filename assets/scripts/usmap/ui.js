@@ -15,14 +15,23 @@ const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
-const mapPage = require('../templates/map.handlebars')
-const mapEvents = require('./events')
 
+const stateDefaultItem = require('../templates/state-default-item.handlebars')
+
+
+const formatDate = function (date) {
+  const d = new Date(date)
+  const month = d.getUTCMonth() + 1
+  const day = d.getUTCDate()
+  const year = d.getUTCFullYear()
+  return month + '/' + day + '/' + year
+}
 
 const showStateView = (items) => {
   const itemByState = showStateAllTemplate(items)
   $('#state-view').append(itemByState)
   createFormHandler()
+
   $('#state-header').text(store.state)
   console.log('store.state is', store.state)
 }
@@ -39,6 +48,39 @@ const showCreateform = () => {
   $('#cancel-create').on('click', cancelCreate)
   // // disable '+' (add new item) button upon clicking
   // $('#create-button').prop('disabled', true)
+
+  console.log('in showStateView and items is ', items)
+
+  const sortedData = items.items.sort(function (a, b) {
+    a = new Date(a.due_date)
+    b = new Date(b.due_date)
+    return a > b ? 1 : a < b ? -1 : 0
+  })
+
+  const incompleteItems = sortedData.filter((item) => {
+    return item.status === 'incomplete'
+  })
+  console.log('incompleteItems is', incompleteItems)
+
+  if (incompleteItems.length > 0) {
+    const nextIncompleteItem = incompleteItems[0]
+    nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
+    nextIncompleteItem.createdAt = formatDate(nextIncompleteItem.createdAt)
+    console.log('nextIncompleteItem is', nextIncompleteItem)
+    $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
+    console.log('no incomplete items')
+  } else {
+    showCreateform()
+  }
+  // pass in default state to state-default handlebars and then append to div id="create-item-container"
+//
+//
+//
+}
+
+const showCreateform = () => {
+  $('#create-item-container').html(showStateItemCreateTemplate)
+
   $('#create-item').on('submit', onCreateItem)
 }
 
@@ -77,7 +119,7 @@ const onCreateItem = function (event) {
       description: content.item.description,
       due_date: content.item.due_date,
       state: store.state,
-      status: content.item.status,
+      status: 'incomplete',
       title: content.item.title,
       category: content.item.category,
       location: content.item.location
@@ -114,16 +156,7 @@ const getmyGoalsSuccess = (data) => {
   const nextIncompleteItem = incompleteItems[0]
   console.log('nextIncompleteItem is', nextIncompleteItem)
 
-  const date = new Date(nextIncompleteItem.due_date)
-
-  const month = date.getUTCMonth() + 1
-  const day = date.getUTCDate()
-  const year = date.getUTCFullYear()
-
-  const forDisplay = month + '/' + day + '/' + year
-  console.log('THE DATE IS NOW', forDisplay)
-
-  nextIncompleteItem.due_date = forDisplay
+  nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
   $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
 
