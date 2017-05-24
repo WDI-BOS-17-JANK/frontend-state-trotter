@@ -26,7 +26,6 @@ const formatDate = function (date) {
   return month + '/' + day + '/' + year
 }
 
-
 const editFormTemplate = require('../templates/state-item-update.handlebars')
 
 const showStateView = (items) => {
@@ -67,8 +66,8 @@ const cancelCreate = () => {
   console.log('store.currentItems in cancelCreate is', store.currentItems)
   // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
   showStateView(store.currentItems)
+  $('#state-header').text(store.state)
 }
-
 
 const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
