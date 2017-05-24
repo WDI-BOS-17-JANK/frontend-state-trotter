@@ -45,6 +45,7 @@ const myGoals = function () {
 }
 
 const onUpdateItem = function (event) {
+  console.log(event)
   const content = getFormFields(event.target)
   event.preventDefault()
   api.updateItem(content)

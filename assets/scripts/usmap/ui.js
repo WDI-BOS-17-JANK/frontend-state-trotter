@@ -108,12 +108,15 @@ const onSaveEdit = (event) => {
   const newContent = getFormFields(event.target)
   event.preventDefault()
   api.saveEdit(newContent, id)
-    .then(saveEditSuccess)
+    .then((data) => {
+      api.getOneItem(id)
+    })
     .catch(saveEditFailure)
+    .then(getOneItemSuccess)
 }
 
-const saveEditSuccess = (data) => {
-  console.log('save edit success', data)
+const getOneItemSuccess = (data) => {
+  console.log(data)
 }
 
 const saveEditFailure = (error) => {

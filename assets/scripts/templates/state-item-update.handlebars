@@ -1,5 +1,15 @@
 <!-- Empty form to create new item -->
-<form id="edit-item" class="edit-item" data-id="{{item.data-id}}">
+<form id="edit-item"
+  class="edit-item"
+  data-title="{{item.data-title}}"
+  data-category="{{item.data-category}}"
+  data-status="{{item.data-status}}"
+  data-description="{{item.data-description}}"
+  data-date="{{item.data-date}}"
+  data-state="{{item.data-state}}"
+  data-id="{{item.data-id}}"
+  data-location="{{item.data-location}}">
+
   <fieldset>
     <input class="form-control" type="text" name="items[title]" placeholder="{{item.data-title}}">
     <input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="items[due_date]" placeholder="{{item.data-date}}">
