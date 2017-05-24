@@ -7,17 +7,16 @@ const store = require('../store.js')
 const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
-const ui = require('./ui')
 
 const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 
-const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
 
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
+const backToMapTemplate = require('../templates/back-to-map.handlebars')
 
 const formatDate = function (date) {
   const d = new Date(date)
@@ -64,18 +63,12 @@ const showStateView = (items) => {
 }
 
 const cancelCreate = () => {
-  // alert('inside cancelCreate!')
-  // $('#map-view-container').html(mapPage)
-  // console.log('mapEvents is', mapEvents)
-  // mapEvents.usMap()
   console.log('store in cancelCreate is', store)
   console.log('store.currentItems in cancelCreate is', store.currentItems)
-  // debugger
-
   // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
   showStateView(store.currentItems)
-  // enable '+' (add new item) button once upon clicking 'cancel'
 }
+
 
 const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
@@ -133,7 +126,7 @@ const createFormHandler = () => {
 }
 
 const hideMap = () => {
-  $('#map-view-container').empty()
+  $('#map-view-container').hide()
 }
 
 const getAttribute = ($button, array) => {
@@ -157,6 +150,8 @@ const getItemsSuccess = (data, region) => {
   showStateView({items: filteredItems})
   hideMap()
   $('#state-header').text(store.state)
+  $('#back-to-map-container').html(backToMapTemplate)
+  // $('#back-to-map-button').on('click', goBacktoMap)
 }
 
 const getItemsFailure = (data) => {
@@ -212,7 +207,7 @@ const getmyGoalsSuccess = (data) => {
 
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
-    $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
+    $('#next-goal').html(nextGoal({item: nextIncompleteItem}))
 
     sortedData.forEach((item, i) => {
       if (i % 3 === 0) {

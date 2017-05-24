@@ -6,11 +6,30 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 
+const goBacktoMap = () => {
+  // alert('inside goBacktoMap')
+  // $('#map-view-container').html(mapPage)
+  // console.log('mapEvents is', mapEvents)
+  // mapEvents.usMap()
+  $('#back-to-map-container').empty()
+  $('#state-view').empty()
+  $('#map-view-container').fadeIn()
+  event.preventDefault()
+  api.getItems()
+    .then((data) => {
+      ui.getmyGoalsSuccess(data)
+    })
+    .catch(ui.getmyGoalsFailure)
+}
+
 const onGetItems = function (element, code, region) {
   event.preventDefault()
   api.getItems()
     .then((data) => {
       ui.getItemsSuccess(data, region)
+    })
+    .then(() => {
+      $('#back-to-map-button').on('click', goBacktoMap)
     })
     .catch(ui.getItemsFailure)
 }
@@ -55,7 +74,7 @@ const usMap = function () {
     hoverOpacity: null,
     normalizeFunction: 'linear',
     scaleColors: ['#b6d6ff', '#005ace'],
-    selectedColor: '#c9dfaf',
+    selectedColor: '#f4f3f0',
     selectedRegions: null,
     showTooltip: true,
     onRegionClick: function (element, code, region) {
