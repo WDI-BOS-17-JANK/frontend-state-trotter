@@ -18,12 +18,42 @@ const showStateItemCreateTemplate = require('../templates/state-item-create.hand
 const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
+const stateDefaultItem = require('../templates/state-default-item.handlebars')
 
+const formatDate = function (date) {
+  const d = new Date(date)
+  const month = d.getUTCMonth() + 1
+  const day = d.getUTCDate()
+  const year = d.getUTCFullYear()
+  return month + '/' + day + '/' + year
+}
 
 const showStateView = (items) => {
   const itemByState = showStateAllTemplate(items)
   $('#state-view').append(itemByState)
   createFormHandler()
+  console.log('in showStateView and items is ', items)
+
+  const sortedData = items.items.sort(function (a, b) {
+    a = new Date(a.due_date)
+    b = new Date(b.due_date)
+    return a > b ? 1 : a < b ? -1 : 0
+  })
+
+  const incompleteItems = sortedData.filter((item) => {
+    return item.status === 'incomplete'
+  })
+  console.log('incompleteItems is', incompleteItems)
+
+  const nextIncompleteItem = incompleteItems[0]
+  nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
+  nextIncompleteItem.createdAt = formatDate(nextIncompleteItem.createdAt)
+  console.log('nextIncompleteItem is', nextIncompleteItem)
+  $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
+  // pass in default state to state-default handlebars and then append to div id="create-item-container"
+//
+//
+//
 }
 
 const showCreateform = () => {
@@ -104,16 +134,7 @@ const getmyGoalsSuccess = (data) => {
   const nextIncompleteItem = incompleteItems[0]
   console.log('nextIncompleteItem is', nextIncompleteItem)
 
-  const date = new Date(nextIncompleteItem.due_date)
-
-  const month = date.getUTCMonth() + 1
-  const day = date.getUTCDate()
-  const year = date.getUTCFullYear()
-
-  const forDisplay = month + '/' + day + '/' + year
-  console.log('THE DATE IS NOW', forDisplay)
-
-  nextIncompleteItem.due_date = forDisplay
+  nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
   $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
 
@@ -135,10 +156,6 @@ const getmyGoalsSuccess = (data) => {
 }
 
 const getmyGoalsFailure = (data) => {
-  console.error(data)
-}
-
-const getItemsFailure = (data) => {
   console.error(data)
 }
 
