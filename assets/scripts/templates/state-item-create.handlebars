@@ -1,11 +1,11 @@
 <!-- Empty form to create new item -->
 <form id="create-item" class="create-item" data-id="{{item}}">
-    <input class="form-control" type="text" name="item[title]" placeholder="Goal">
-    <input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="item[due_date]" placeholder="Due date">
+    <input class="form-control" type="text" name="item[title]" placeholder="Goal" required>
+    <input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="item[due_date]" placeholder="Due date" required>
     <!-- <input type="text" name="item[state]" placeholder="State"> -->
-    <input class="form-control" type="text" name="item[location]" placeholder="Location">
-    <input class="form-control" type="text" name="item[description]" placeholder="Description">
-    <input class="form-control" type="text" name="item[category]" placeholder="Category">
+    <input class="form-control" type="text" name="item[location]" placeholder="Location" required>
+    <input class="form-control" type="text" name="item[description]" placeholder="Description" required>
+    <input class="form-control" type="text" name="item[category]" placeholder="Category" required>
     <!-- <input class="form-control" type="text" name="item[status]" placeholder="Status"> -->
     <!-- <button data-id="{{item.id}}" class="glyphicon glyphicon-ok-circle" type="button" name="Add">Add</button> -->
     <input class="form-control" class="glyphicon glyphicon-ok-circle" data-id="{{item.id}}" type="submit" name="Submit" value="Create">
