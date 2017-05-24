@@ -1,0 +1,70 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #606060;
+  background-color: #FAFBFC;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+h1 {
+  font-family: 'Londrina Solid', sans-serif;
+  margin: 0 0 0 0;
+  font-size: 8em;
+  font-weight: 400;
+  letter-spacing: 25px;
+  line-height: 1.1em;
+  text-transform: uppercase;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #606060;
+}
+
+h2 {
+  margin: 0 0 0.5em;
+  font-size: 1.6em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0 0 0.5em;
+  font-size: 1.3em;
+}
+
+h4 {
+  margin: 0 0 1.5em;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 0.9em;
+}
+
+h6 {
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+p {
+  font-family: 'Raleway', sans-serif;
+  margin: 0 0 1em;
+  text-align: justify;
+  font-size: 1em;
+}
+
+span.star-icon {
+  color: #DCC03B;
+}

@@ -1,6 +1,8 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Barrio|Londrina+Solid|Flamenco|Montserrat:700|Poiret+One|Raleway:400,500|Roboto:400,500');
 @import 'reset';
+@import 'typography';
 
 //////////////////////////////
 // Global
@@ -25,7 +27,3 @@ footer {
 .status-message {
   text-align: center;
 }
-
-//////////////////////////////
-// End Global
-//////////////////////////////
