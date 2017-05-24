@@ -66,9 +66,30 @@ const destroyItem = function (content) {
   })
 }
 
+const saveEdit = function (newContent, id) {
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiOrigin + '/items/' + id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      item: {
+        description: newContent.items.description,
+        due_date: newContent.items.due_date,
+        status: newContent.items.status,
+        title: newContent.items.title,
+        category: newContent.items.category,
+        location: newContent.items.location
+      }
+    }
+  })
+}
+
 module.exports = {
   getItems,
   createItem,
   updateItem,
-  destroyItem
+  destroyItem,
+  saveEdit
 }
