@@ -8,13 +8,11 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
 const ui = require('./ui')
-// const onCreateItem = require('./events')
-// const showLandingTemplate = require('../templates/landing.handlebars')
+
 const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
-// const showStateItemDetailsTemplate = require('../templates/state-item-details.handlebars')
-// const showStateItemUpdateTemplate = require('../templates/state-item-update.handlebars')
+
 const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
@@ -131,7 +129,6 @@ const getmyGoalsSuccess = (data) => {
   })
   console.log('incompleteItems is', incompleteItems)
 
-
   if (incompleteItems.length > 0) {
     const nextIncompleteItem = incompleteItems[0]
     console.log('nextIncompleteItem is', nextIncompleteItem)
@@ -200,7 +197,7 @@ module.exports = {
   updateItemFailure,
   destroyItemFailure,
   destroyItemSuccess,
+  createFormHandler,
   getmyGoalsSuccess,
-  getmyGoalsFailure,
-  createFormHandler
+  getmyGoalsFailure
 }
