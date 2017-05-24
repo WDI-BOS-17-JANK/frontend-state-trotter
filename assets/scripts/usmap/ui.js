@@ -7,16 +7,15 @@ const store = require('../store.js')
 const getFormFields = require(`../../../lib/get-form-fields`)
 
 const api = require('./api')
-const ui = require('./ui')
 
 const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
 
-const mapPage = require('../templates/map.handlebars')
 const allGoals = require('../templates/all-goals.handlebars')
 const nextGoal = require('../templates/next-goal.handlebars')
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
+const backToMapTemplate = require('../templates/back-to-map.handlebars')
 
 
 const formatDate = function (date) {
@@ -30,8 +29,12 @@ const formatDate = function (date) {
 const editFormTemplate = require('../templates/state-item-update.handlebars')
 
 const showStateView = (items) => {
+  console.log('store.currentItems in showStateView is', store.currentItems)
+  // store items in store.currentItems object, to be used in createItemSuccess
+  store.currentItems = items
+  // currentItems = items
   const itemByState = showStateAllTemplate(items)
-  $('#state-view').append(itemByState)
+  $('#state-view').html(itemByState)
   createFormHandler()
   console.log('in showStateView and items is ', items)
 
@@ -58,9 +61,18 @@ const showStateView = (items) => {
   }
 }
 
+const cancelCreate = () => {
+  console.log('store in cancelCreate is', store)
+  console.log('store.currentItems in cancelCreate is', store.currentItems)
+  // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
+  showStateView(store.currentItems)
+  $('#state-header').text(store.state)
+}
+
 const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
+  $('#cancel-create').on('click', cancelCreate)
 }
 // swap in the edit form template
 const showEditForm = (event) => {
@@ -95,25 +107,43 @@ const onSaveEdit = (event) => {
   const newContent = getFormFields(event.target)
   event.preventDefault()
   api.saveEdit(newContent, id)
-    .then(saveEditSuccess)
+    .then((data) => {
+      return api.updateAfterEdit(id)
+    })
     .catch(saveEditFailure)
+    .then(updateAfterEditSuccess)
+    .catch(updateAfterEditFailure)
 }
 
-const saveEditSuccess = (data) => {
-  console.log('save edit success', data)
+const updateAfterEditSuccess = (data) => {
+  const $list = $('#item-list').children('.checkbox-item').children('button')
+  const $buttonToUpdate = $list.filter((x, e, a) => {
+    const current = $(e).attr('data-id')
+
+    return current === data.item._id
+  })
+  const addItemToListHtml = addItemToList({item: data.item})
+  const $checkBoxToUpdate = $buttonToUpdate.parents('.checkbox-item')
+  $($checkBoxToUpdate).replaceWith(addItemToListHtml)
+  createFormHandler()
 }
 
+const updateAfterEditFailure = (error) => {
+  console.error(error)
+}
 const saveEditFailure = (error) => {
   console.error(error)
 }
 
 const createFormHandler = () => {
+  $('#create-button').off('click', showCreateform)
   $('#create-button').on('click', showCreateform)
+  $('.edit-button').off('click', showEditForm)
   $('.edit-button').on('click', showEditForm)
 }
 
 const hideMap = () => {
-  $('#map-view-container').empty()
+  $('#map-view-container').hide()
 }
 
 const getAttribute = ($button, array) => {
@@ -138,6 +168,8 @@ const getItemsSuccess = (data, region) => {
   hideMap()
 
   $('#state-header').text(store.state)
+  $('#back-to-map-container').html(backToMapTemplate)
+  // $('#back-to-map-button').on('click', goBacktoMap)
 }
 
 const getItemsFailure = (data) => {
@@ -193,7 +225,7 @@ const getmyGoalsSuccess = (data) => {
 
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
-    $('#next-goal').append(nextGoal({item: nextIncompleteItem}))
+    $('#next-goal').html(nextGoal({item: nextIncompleteItem}))
 
     sortedData.forEach((item, i) => {
       if (i % 3 === 0) {
@@ -221,8 +253,12 @@ const getmyGoalsFailure = (data) => {
 }
 
 const createItemSuccess = (data) => {
-  console.log('response is', data)
-  // disappear form on sucess
+  // console.log('data in createItemSuccess is', data)
+  // console.log('store.currentItems before is', store.currentItems)
+  // Push newly created item into the currentItems object. Now it is an object of all items (in an array), including new ones.
+  store.currentItems.items.push(data.item)
+  // console.log('store.currentItems after is', store.currentItems)
+  // form disappears on sucsess
   $('#create-item').remove()
   return data
 }

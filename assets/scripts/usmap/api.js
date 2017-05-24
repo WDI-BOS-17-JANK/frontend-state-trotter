@@ -95,6 +95,15 @@ const saveEdit = function (newContent, id) {
     }
   })
 }
+const updateAfterEdit = function (id) {
+  return $.ajax({
+    method: 'GET',
+    url: config.apiOrigin + '/items/' + id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
 
 module.exports = {
   getItems,
@@ -102,5 +111,6 @@ module.exports = {
   createItem,
   updateItem,
   destroyItem,
-  saveEdit
+  saveEdit,
+  updateAfterEdit
 }

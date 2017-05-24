@@ -6,6 +6,7 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 
+
 const showSelectedItem = (event) => {
   console.log('inside showSelectedItem and event is', event.target)
   // on click of the display button ('#display-button'),
@@ -15,6 +16,22 @@ const showSelectedItem = (event) => {
   api.showItem(id)
   .then(ui.getItemSuccess)
   .catch(ui.getItemsFailure)
+}
+
+const goBacktoMap = () => {
+  // alert('inside goBacktoMap')
+  // $('#map-view-container').html(mapPage)
+  // console.log('mapEvents is', mapEvents)
+  // mapEvents.usMap()
+  $('#back-to-map-container').empty()
+  $('#state-view').empty()
+  $('#map-view-container').fadeIn()
+  event.preventDefault()
+  api.getItems()
+    .then((data) => {
+      ui.getmyGoalsSuccess(data)
+    })
+    .catch(ui.getmyGoalsFailure)
 }
 
 const onGetItems = function (element, code, region) {
@@ -27,9 +44,10 @@ const onGetItems = function (element, code, region) {
     .then(() => {
       $('.display-details-button').on('click', showSelectedItem)
     })
-    .then(console.log('On Get Items complete!'))
+    .then(() => {
+      $('#back-to-map-button').on('click', goBacktoMap)
+    })
     .catch(ui.getItemsFailure)
-  console.log('On Get Items complete!2')
 }
 
 const myGoals = function () {
@@ -55,6 +73,7 @@ const onShowItem = function (element, code, region) {
 }
 
 const onUpdateItem = function (event) {
+  console.log(event)
   const content = getFormFields(event.target)
   event.preventDefault()
   api.updateItem(content)
@@ -84,7 +103,7 @@ const usMap = function () {
     hoverOpacity: null,
     normalizeFunction: 'linear',
     scaleColors: ['#b6d6ff', '#005ace'],
-    selectedColor: '#c9dfaf',
+    selectedColor: '#f4f3f0',
     selectedRegions: null,
     showTooltip: true,
     onRegionClick: function (element, code, region) {

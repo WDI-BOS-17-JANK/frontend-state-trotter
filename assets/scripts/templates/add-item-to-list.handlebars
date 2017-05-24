@@ -4,5 +4,17 @@
         <span class="custom-control-indicator"></span>
       </label>
       <span>{{item.title}}</span>
-        <button data-id="{{item.id}}" class="btn-btn-default inline edit-button" type="button">Edit</button>
+      <button
+        data-title="{{item.title}}"
+        data-category="{{item.category}}"
+        data-status="{{item.status}}"
+        data-description="{{item.description}}"
+        data-date="{{item.due_date}}"
+        data-state="{{item.state}}"
+        data-id="{{item.id}}"
+        data-location="{{item.location}}"
+        class="btn-btn-default inline edit-button"
+        type="button">
+          Edit
+      </button>
 </div>
