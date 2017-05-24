@@ -68,7 +68,6 @@ const addLandingHandlers = () => {
       $('#change-password').on('submit', onChangePassword)
       $('#map-view-container').html(mapPage)
       mapEvents.myGoals()
-
     }
   })
   // $('#change-password').on('submit', onChangePassword)
