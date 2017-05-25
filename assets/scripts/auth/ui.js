@@ -15,6 +15,7 @@ const signUpSuccess = (response) => { // argument can be (response) or something
   // flashcardapi.getFlashcards()
   //   .then(flashcardui.getFlashcardsSuccess)
   //   .catch(flashcardui.getFlashcardsFailure)
+  $('.status-message').text('Account created. Sign In!')
 }
 
 const signUpFailure = () => {
@@ -28,42 +29,33 @@ const signInSuccess = (response) => { // argument can be (response) or something
   // In case someone clicks 'back' in browser while siebar still open, then goes forward again to the page, and signs in.
   store.user = response.user // response.user is the email id and token // stores whatever that was in that response
   console.log('signInSuccess complete')
+  $('.status-message').text('Select the state you want to trot!')
 }
 
 const signInFailure = () => {
   $('.signin-status-message').text('Wrong username and or password.')
+  console.log('Sign in failure.')
 }
 
 const changePasswordSuccess = (response) => {
-  $('.change-pw-status-message').text('Password changed successfully.')
+  $('.status-message').text('Password changed successfully.')
+  console.log('Password changed successfully.')
 }
 
 const changePasswordFailure = () => {
-  $('.change-pw-status-message').text('Password could not be changed. Please try again.')
+  $('.status-message').text('Password could not be changed. Please try again.')
+  console.log('Password could not be changed. Please try again.')
 }
 
 const signOutSuccess = () => {
-  $('.header').fadeIn()
-  $('.flashcard-container').hide()
-  $('.flashcard-container-header').hide()
-  $('footer').hide()
-  $('#view-all').hide()
-  document.getElementById('change-password').reset()
-  $('.change-pw-status-message').text('')
-
-  if ($('input[name=hamburger-menu').is(':checked')) {
-    $('input[name=hamburger-menu]').click()
-  }
-  // scroll back to top of landing page upon successful signout
-  $(document).ready(function () {
-    window.scrollTo(0, 0)
-  })
-
+  console.log('sign out successful')
   store.user = null // only have one person signed in in a givne session, one browser
+  $('.status-message').text('Sign Back In Or Create A New Account.')
 }
 
 const signOutFailure = () => {
-  $('#content-status-message').text('Something went wrong. Please try again.')
+  $('.status-message').text('Something went wrong. Please try again.')
+  console.log('Something went wrong. Please try again.')
 }
 
 module.exports = {

@@ -24,9 +24,9 @@
                   <div class="modal-body">
                     <form id="sign-in" class="text-align-center">
                       <fieldset>
-                        <input type="text" name="credentials[email]" placeholder="email">
+                        <input type="text" name="credentials[email]" placeholder="email" required>
                         <!-- [email] is the key of credentials object. name matters. Our object is made to look like what we see in sign-uo.sh  -->
-                        <input type="password" name="credentials[password]" placeholder="password">
+                        <input type="password" name="credentials[password]" placeholder="password" required>
                         <input type="submit" name="submit" value="Submit">
                       </fieldset>
                     </form>
@@ -69,10 +69,10 @@
                   <div class="modal-body">
                     <form id="sign-up" class="text-align-center">
                       <fieldset>
-                        <input type="text" name="credentials[email]" placeholder="email">
+                        <input type="text" name="credentials[email]" placeholder="email" required>
                         <!-- name matters. Our object is made to look like what we see in sign-uo.sh  -->
-                        <input type="password" name="credentials[password]" placeholder="password">
-                        <input type="password" name="credentials[password_confirmation]" placeholder="password_confirmation">
+                        <input type="password" name="credentials[password]" placeholder="password" required>
+                        <input type="password" name="credentials[password_confirmation]" placeholder="password_confirmation" required>
                         <input type="submit" name="submit" value="Submit">
                       </fieldset>
                     </form>

@@ -14,6 +14,16 @@ const getItems = function () {
   })
 }
 
+const showItem = function (id) {
+  return $.ajax({
+    method: 'GET',
+    url: config.apiOrigin + '/items/' + id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const createItem = function (content) {
   console.log('inside api/createItem and the content is', content)
   return $.ajax({
@@ -56,10 +66,39 @@ const updateItem = function (content) {
   })
 }
 
-const destroyItem = function (content) {
+const destroyItem = function (id) {
   return $.ajax({
     method: 'DELETE',
-    url: config.apiOrigin + '/items/' + content.item.id,
+    url: config.apiOrigin + '/items/' + id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const saveEdit = function (newContent, id) {
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiOrigin + '/items/' + id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      item: {
+        description: newContent.items.description,
+        due_date: newContent.items.due_date,
+        status: newContent.items.status,
+        title: newContent.items.title,
+        category: newContent.items.category,
+        location: newContent.items.location
+      }
+    }
+  })
+}
+const updateAfterEdit = function (id) {
+  return $.ajax({
+    method: 'GET',
+    url: config.apiOrigin + '/items/' + id,
     headers: {
       Authorization: 'Token token=' + store.user.token
     }
@@ -68,7 +107,10 @@ const destroyItem = function (content) {
 
 module.exports = {
   getItems,
+  showItem,
   createItem,
   updateItem,
-  destroyItem
+  destroyItem,
+  saveEdit,
+  updateAfterEdit
 }

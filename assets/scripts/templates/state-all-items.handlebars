@@ -1,15 +1,56 @@
+<h2 id="state-header" class="state-header"></h2>
 
 <!-- req.body.item[i].title -->
 <div class="row checkbox">
-  <div class="col-sm-8">
+  <div class="col-sm-8" id="item-list">
     {{#each items as |item|}}
-      <div class="checkbox-item" data-id="{{item.id}}">
+      <div class="checkbox-item">
         <label class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">{{item.title}}</span>
             </label>
+            <span>{{item.title}}</span>
+          <button
+              data-title="{{item.title}}"
+              data-category="{{item.category}}"
+              data-status="{{item.status}}"
+              data-description="{{item.description}}"
+              data-date="{{item.due_date}}"
+              data-state="{{item.state}}"
+              data-id="{{item.id}}"
+              data-location="{{item.location}}"
+              class="btn-btn-default inline display-details-button"
+              type="button">
+                Details
+          </button>
+          <button
+            data-title="{{item.title}}"
+            data-category="{{item.category}}"
+            data-status="{{item.status}}"
+            data-description="{{item.description}}"
+            data-date="{{item.due_date}}"
+            data-state="{{item.state}}"
+            data-id="{{item.id}}"
+            data-location="{{item.location}}"
+            class="btn-btn-default inline edit-button"
+            type="button">
+              Edit
+          </button>
+          <button
+            data-title="{{item.title}}"
+            data-category="{{item.category}}"
+            data-status="{{item.status}}"
+            data-description="{{item.description}}"
+            data-date="{{item.due_date}}"
+            data-state="{{item.state}}"
+            data-id="{{item.id}}"
+            data-location="{{item.location}}"
+            class="btn-btn-default inline delete-button"
+            type="button">
+              Delete
+          </button>
       </div>
+
 
     {{/each}}
     <div id="new-item-container" class="new-item-container">
@@ -21,7 +62,14 @@
 
   <div class="col-sm-4">
     <div id="create-item-container" class="create-item-container">
+      <!-- Start state-item-create.handlebars -->
+      <!-- End state-item-create.handlebars -->
 
+      <!-- Start state-default-item.handlebars -->
+      <!-- End state-default-item.handlebars -->
+
+      <!-- Start state-item-update.handlebars -->
+      <!-- End state-item-update.handlebars -->
     </div>
 
   </div>
