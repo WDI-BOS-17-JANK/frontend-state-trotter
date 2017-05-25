@@ -16,12 +16,31 @@ State Trotter is a bucket list app divded by state.
 - Back-end: Express.js, MongoDB, (RESTful API), Node modules
 
 ## Strategy for Planning, Development, & Problem-Solving:
-I came up with the idea of building a Japanese/English language flashcard web app because this app would be a good starting point for a
-Japanese/English dictionary app that I would like to build in the future. Before joining GA, I found a set of data made public that consists of Japanese words/phrases matched with definitions in English and Japanese and imported it into a database I built in MySQL, but had difficulty representing Japanese unicode characters. I decided to take this opportunity to work on a project that allows me to work on overcoming this difficulty so that I could apply what I learn onto my future project. As for this flashcard app, the vision is to have it be used by people who would like to memorize Japanese words and short phrases via repetition.
-In building this app, I followed the recommended schedule provided by the General Assembly consultants. I started with making a wireframe, and then proceeded on to making user stories, which allowed me to think in a user’s perspective. I initially built the app with simple buttons and forms that would allow me to test out the ajax calls to the API later on. Moving on to the backend, I built my database, tables, and relationships between the user and flashcard resources. Once I finished building my backend, I revisited the frontend and started building the code to ping the API and receive data back.
-I had the most trouble with Rails API, especially understanding the path that the server takes to return a response back to a client. What helped me a lot during the development process was to use console.log and ‘debugger’ at every step of the code in order to pinpoint where exactly I am getting the error responses, and to check what data is being returned at each stage. This strategy has helped me immensely throughout the development process.
+We decided to use the 50 US states to frame our bucket list project.  We know that some
+people aspire to visit all 50 use states as a life goal, so we wanted to build and app
+that would help to track progress against that goal.  We decided on this framework in
+one of our first team meetings, and then met all day Saturday to game plan and get started.
 
+We spent a couple of hours on the planning phase, which helped quite a bit.  We
+reviewed the user stories and wireframes and made sure to cross reference our plans
+with the project prompt to ensure that we would meet requirements.  We used the project
+planning website Trello for tracking tasks and assigning them to individuals.
 
+From there we took split into pairs for programming.  We rotated pairs over the course
+of the work but also met frequently as a team, at least once in the morning and evenings
+to game plan and also throughout the day, which helped to keep everyone on track.
+
+Programming progressed slowly but steadily.  One of our main challenges in the last
+day was that we realized the way we had divided our code up between files (events.js
+versus ui.js specifically) was flawed and needed to be refactored.  We spent about
+2 hours late Wednesday on that.  Ultimately we were successful in revising the code,
+but it did cost us some time and aggravation along the way.  In the end, it was a
+good lesson to carry forward.
+
+Ultimately we were not able to complete most of our stretch goals, but we instead
+we chose to focus on putting together a working app that satisfied all requirements.
+We also learned quite a bit about working collaboratively through GitHub and
+resolving merge conflicts when they arose.
 
 ## Entity Relationship Diagram
  [State Trotter ERD](https://www.dropbox.com/s/9rsuenwt6w0ldam/ERD-revised-2.png?dl=0)
