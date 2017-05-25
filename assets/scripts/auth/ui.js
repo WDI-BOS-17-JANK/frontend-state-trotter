@@ -19,7 +19,8 @@ const signUpSuccess = (response) => { // argument can be (response) or something
 }
 
 const signUpFailure = () => {
-  $('.signup-status-message').text('Username taken or the passwords do not match. Please try again.')
+  $('.signup-status-message').text('Username taken. Please try again.')
+  document.getElementById('sign-up').reset()
 }
 
 const signInSuccess = (response) => { // argument can be (response) or something too. Just an argument name
@@ -40,6 +41,7 @@ const signInFailure = () => {
 const changePasswordSuccess = (response) => {
   $('.status-message').text('Password changed successfully.')
   console.log('Password changed successfully.')
+  document.getElementById('change-password').reset()
 }
 
 const changePasswordFailure = () => {
