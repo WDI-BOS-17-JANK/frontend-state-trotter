@@ -61,7 +61,7 @@ const addLandingHandlers = () => {
   $('#sign-in').on('submit', onSignIn)
   $('#modal-signin').on('hidden.bs.modal', function () {
     console.log('store.user is ', store.user)
-    if (store.user !== undefined) {
+    if (store.user !== undefined && store.user !== null) {
       $('#landing-view-container').html('')
       $('#main-view-container').html(mainPageNav)
       $('#sign-out').on('submit', onSignOut)
