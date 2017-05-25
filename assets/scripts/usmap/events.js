@@ -158,6 +158,9 @@ const onSaveEdit = (event) => {
     .then((data) => {
       return api.updateAfterEdit(id)
     })
+    .then(() => {
+      onGetItems(1, 1, $(event.target).attr('data-state'))
+    })
     .catch(ui.saveEditFailure)
     .then(ui.updateAfterEditSuccess)
     .then(createFormHandler)
