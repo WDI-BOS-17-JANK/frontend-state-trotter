@@ -25,7 +25,6 @@ const showItem = function (id) {
 }
 
 const createItem = function (content) {
-  console.log('inside api/createItem and the content is', content)
   return $.ajax({
     method: 'POST',
     url: config.apiOrigin + '/items',
