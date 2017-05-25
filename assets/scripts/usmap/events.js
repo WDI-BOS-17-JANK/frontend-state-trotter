@@ -9,7 +9,6 @@ const formatDate = require('./formatDate.js')
 // templates
 const editFormTemplate = require('../templates/state-item-update.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
-const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
 
@@ -20,6 +19,8 @@ const deleteItem = function (event) {
 }
 
 const showSelectedItem = (event) => {
+  // on click of the display button ('#display-button'),
+  // display the state-default items handlebar
   const id = $(event.target).attr('data-id')
   api.showItem(id)
   .then(ui.getItemSuccess)
@@ -121,11 +122,12 @@ const onCreateItem = function (event) {
     .then(() => {
       onGetItems(1, 1, newData.item.state)
     })
-    // .then(showStateView)
     .catch(ui.createItemFailure)
 }
 
 const cancelCreate = () => {
+  // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
+  onGetItems(1, 1, store.state)
   $('#state-header').text(store.state)
 }
 
@@ -147,6 +149,7 @@ const onSaveEdit = (event) => {
       onGetItems(1, 1, $(event.target).attr('data-state'))
     })
     .catch(ui.saveEditFailure)
+    .then(ui.updateAfterEditSuccess)
     .then(createFormHandler)
     .catch(ui.updateAfterEditFailure)
 }

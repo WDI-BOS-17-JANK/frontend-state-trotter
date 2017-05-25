@@ -28,7 +28,6 @@ const signInSuccess = (response) => { // argument can be (response) or something
   document.getElementById('sign-in').reset()
   // In case someone clicks 'back' in browser while siebar still open, then goes forward again to the page, and signs in.
   store.user = response.user // response.user is the email id and token // stores whatever that was in that response
-  $('.status-message').text('Select the state you want to trot!')
 }
 
 const signInFailure = () => {
