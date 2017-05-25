@@ -84,7 +84,9 @@ const getmyGoalsSuccess = (data) => {
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
     $('#next-goal').html(nextGoal({item: nextIncompleteItem}))
-
+    $('#goal-column-0').empty()
+    $('#goal-column-1').empty()
+    $('#goal-column-2').empty()
     sortedData.forEach((item, i) => {
       if (i % 3 === 0) {
         $('#goal-column-0').append(allGoals({
