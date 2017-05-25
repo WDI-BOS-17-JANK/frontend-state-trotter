@@ -147,7 +147,8 @@ const cancelCreate = () => {
 
 const cancelUpdate = () => {
   showStateView(store.currentItems)
-  $('#state-header').text(store.state)
+  // $('#state-header').text(store.state)
+  onGetItems(1, 1, store.state)
 }
 
 const onSaveEdit = (event) => {
