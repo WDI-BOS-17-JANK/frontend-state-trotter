@@ -129,6 +129,7 @@ const getItemSuccess = (data) => {
   data.item.due_date = formatDate(data.item.due_date)
   data.item.createdAt = formatDate(data.item.createdAt)
   $('#create-item-container').html(stateDefaultItem({item: data.item}))
+  $('.detail-header').text('Selected Item:')
 }
 
 const getItemFailure = (data) => {
