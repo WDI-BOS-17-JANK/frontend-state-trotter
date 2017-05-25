@@ -30,6 +30,7 @@ const goBacktoMap = () => {
   $('#back-to-map-container').empty()
   $('#state-view').empty()
   $('#map-view-container').fadeIn()
+  $('#status-message').empty()
   api.getItems()
     .then((data) => {
       ui.getmyGoalsSuccess(data)
