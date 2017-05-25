@@ -21,31 +21,7 @@ Japanese/English dictionary app that I would like to build in the future. Before
 In building this app, I followed the recommended schedule provided by the General Assembly consultants. I started with making a wireframe, and then proceeded on to making user stories, which allowed me to think in a user’s perspective. I initially built the app with simple buttons and forms that would allow me to test out the ajax calls to the API later on. Moving on to the backend, I built my database, tables, and relationships between the user and flashcard resources. Once I finished building my backend, I revisited the frontend and started building the code to ping the API and receive data back.
 I had the most trouble with Rails API, especially understanding the path that the server takes to return a response back to a client. What helped me a lot during the development process was to use console.log and ‘debugger’ at every step of the code in order to pinpoint where exactly I am getting the error responses, and to check what data is being returned at each stage. This strategy has helped me immensely throughout the development process.
 
-## API Routes
-#### Users
-| Verb   | URI Pattern          | Controller#Action |
-|--------|----------------------|-------------------|
-| POST   | /sign-up             | users#signup      |
-| POST   | /sign-in             | users#signin      |
-| DELETE | /sign-out/:id        | users#signout     |
-| PATCH  | /change-password/:id | users#changepw    |
-- post ‘/sign-up’ => ‘users#signup’
-- post ‘/sign-in’ => ‘users#signin’
-- delete ‘/sign-out/:id’ => ‘users#signout’
-- patch ‘/change-password/:id’ => ‘users#changepw’
-#### Items (Goals)
-| Verb   | URI Pattern      | Controller#Action      |
-|--------|------------------|------------------------|
-| GET    | /items      | items#index       |
-| GET    | /items/:id  | items#show        |
-| POST   | /items      | items#create      |
-| PATCH  | /items/:id  | items#update      |
-| DELETE | /items/:id  | items#destroy     |
-- get ‘/items/’ => ‘items#index’
-- get ‘/items/:id’ => 'items#show'
-- post ‘/items/’ => ‘items#create’
-- patch ‘/items/:id’ => ‘items#update’
-- delete ‘/items/:id’ => ‘items#destroy’
+
 
 ## Entity Relationship Diagram
  [State Trotter ERD](https://www.dropbox.com/s/9rsuenwt6w0ldam/ERD-revised-2.png?dl=0)
