@@ -25,10 +25,10 @@ const updateAfterEditSuccess = (data) => {
 }
 
 const updateAfterEditFailure = (error) => {
-  console.error(error)
+
 }
 const saveEditFailure = (error) => {
-  console.error(error)
+
 }
 
 const hideMap = () => {
