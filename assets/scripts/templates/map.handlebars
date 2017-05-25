@@ -1,23 +1,25 @@
 <section id="map-view" class="map-view">
   <div id="goal-message" class="goal-message">
-    <h3>Next goal: <span id="next-goal"></span></h3>
+    <h2>Next goal: <span id="next-goal"></span></h2>
   </div>
 
   <aside id="us-map" class="us-map">
     <!-- Start of map code -->
-    <div id="vmap" style="width: 600px; height: 400px;"></div>
+    <div class="vmap" id="vmap" style="width: 600px; height: 400px;"></div>
     <!-- End of map code -->
+    <span id="map-tooltip" class="map-tooltip"></span>
     <h5>Click on a state to view or add new goals.</h5>
   </aside>
 
+
   <main id="goals" class="goals">
-    <h4>My goals</h4>
-    <div class="row">
-      <div class="col-sm-4" id="goal-column-0">
+    <h2 id="my-goals-header" class="my-goals-header">My goals</h2>
+    <div class="my-goals-row row">
+      <div class="col-sm-4 goal-column" id="goal-column-0">
       </div>
-      <div class="col-sm-4" id="goal-column-1">
+      <div class="col-sm-4 goal-column" id="goal-column-1">
       </div>
-      <div class="col-sm-4" id="goal-column-2">
+      <div class="col-sm-4 goal-column" id="goal-column-2">
       </div>
     </div>
 

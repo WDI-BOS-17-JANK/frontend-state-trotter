@@ -17,11 +17,11 @@ const onSignUp = function (event) {
   //   .catch(ui.signUpFailure)
   api.signUp(data) // check the api.js file to see. When successful, show signUpSucess message, otherwise, signUpFailure message
     .then(ui.signUpSuccess)
-    .then(() => {
-      api.signIn(data)
-        .then(ui.signInSuccess)
-        .catch(ui.signInFailure)
-    })
+    // .then(() => {
+    //   api.signIn(data)
+    //     .then(ui.signInSuccess)
+    //     .catch(ui.signInFailure)
+    // })
     .catch(ui.signUpFailure)
 }
 

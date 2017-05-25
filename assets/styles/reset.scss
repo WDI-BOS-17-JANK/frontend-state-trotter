@@ -1,0 +1,38 @@
+//////////////////////////////
+// Reset
+//////////////////////////////
+
+html, body {
+  height: 100%;
+}
+
+html, body, div, section, article, aside, header, legend, footer, nav, h1, h2, h3, h4, h5, h6, p, blockquote, address, span, em, strong, img, ol, ul, li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	font: inherit;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+/* html5 display rule */
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+menu,
+nav,
+nav,
+section {
+  display: block;
+}
+
+.container-fluid {
+  padding-left: 0px;
+  padding-right: 0px;
+}
