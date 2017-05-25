@@ -12,18 +12,6 @@ const nextGoal = require('../templates/next-goal.handlebars')
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
 const backToMapTemplate = require('../templates/back-to-map.handlebars')
 
-const updateAfterEditSuccess = (data) => {
-  const $list = $('#item-list').children('.checkbox-item').children('button')
-  const $buttonToUpdate = $list.filter((x, e, a) => {
-    const current = $(e).attr('data-id')
-
-    return current === data.item._id
-  })
-  const addItemToListHtml = addItemToList({item: data.item})
-  const $checkBoxToUpdate = $buttonToUpdate.parents('.checkbox-item')
-  $($checkBoxToUpdate).replaceWith(addItemToListHtml)
-}
-
 const updateAfterEditFailure = (error) => {
   console.error(error)
 }
@@ -64,7 +52,6 @@ const getItemsFailure = (data) => {
 }
 
 const getmyGoalsSuccess = (data) => {
-  console.log('in getmyGoalsSuccess and data is', data)
 
   const sortedData = data.items.sort(function (a, b) {
     a = new Date(a.due_date)
@@ -75,11 +62,9 @@ const getmyGoalsSuccess = (data) => {
   const incompleteItems = sortedData.filter((item) => {
     return item.status === 'incomplete'
   })
-  console.log('incompleteItems is', incompleteItems)
 
   if (incompleteItems.length > 0) {
     const nextIncompleteItem = incompleteItems[0]
-    console.log('nextIncompleteItem is', nextIncompleteItem)
 
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
@@ -112,12 +97,7 @@ const getmyGoalsFailure = (data) => {
 }
 
 const createItemSuccess = (data) => {
-  // console.log('data in createItemSuccess is', data)
-  // console.log('store.currentItems before is', store.currentItems)
-  // Push newly created item into the currentItems object. Now it is an object of all items (in an array), including new ones.
   store.currentItems.items.push(data.item)
-  // console.log('store.currentItems after is', store.currentItems)
-  // form disappears on sucsess
   $('#create-item').remove()
   return data
 }
@@ -127,7 +107,6 @@ const createItemFailure = (data) => {
 }
 
 const getItemSuccess = (data) => {
-  console.log(data)
   data.item.due_date = formatDate(data.item.due_date)
   data.item.createdAt = formatDate(data.item.createdAt)
   $('#create-item-container').html(stateDefaultItem({item: data.item}))
@@ -139,7 +118,6 @@ const getItemFailure = (data) => {
 }
 
 const updateItemSuccess = (data) => {
-  console.log(data)
 }
 
 const updateItemFailure = (data) => {
@@ -147,7 +125,6 @@ const updateItemFailure = (data) => {
 }
 
 const destroyItemSuccess = (data) => {
-  console.log('successfully destroyed item')
 }
 
 const destroyItemFailure = (data) => {
@@ -169,6 +146,5 @@ module.exports = {
   getmyGoalsSuccess,
   getmyGoalsFailure,
   saveEditFailure,
-  updateAfterEditFailure,
-  updateAfterEditSuccess
+  updateAfterEditFailure
 }
