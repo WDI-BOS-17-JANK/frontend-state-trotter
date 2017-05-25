@@ -232,7 +232,10 @@ const usMap = function () {
     scaleColors: ['#b6d6ff', '#005ace'],
     selectedColor: '#f4f3f0',
     selectedRegions: null,
-    showTooltip: true,
+    showTooltip: false,
+    onRegionOver: function (element, code, region) {
+      $('#map-tooltip').text(region)
+    },
     onRegionClick: function (element, code, region) {
       console.log('what state did i click on?', region)
       onGetItems(element, code, region)

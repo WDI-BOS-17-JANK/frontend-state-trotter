@@ -4,6 +4,14 @@
 
 .us-map {
   // border: 2px solid red;
+  position: relative;
+}
+
+.map-tooltip {
+  position: absolute;
+  right: 25%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .vmap {
