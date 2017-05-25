@@ -11,19 +11,6 @@ State Trotter is a bucket list app divded by state.
 ## How to Use the App
 1. Select a state where you want to add a goal to achieve. Add a bucket-list item (a goal) for that state by creating a goal you want to achieve and the date you want to achieve it by. Check off goals you've completed. Create more goals and see the items you have and have not completed.
 
-## Dependencies
-
-Express middleware and Node modules installed with `npm install`.
-
--   [`express`](http://expressjs.com/)
--   [`mongoose`](http://mongoosejs.com/)
-
-Each team member will need to create their own SECRET_KEY in their local repositories, for development testing. Do not push .env file to Git Hub, as per best practices. You will use this terminal command in the root of the project directory to generate a .env file with a SECRET_KEY. The only neccessary step to follow is to set a SECRET_KEY.
-```sh
-echo SECRET_KEY=$(/usr/local/opt/openssl/bin/openssl rand -base64 66 | tr -d '\n') >>.env
-```
-Followed set-up from [`Express-API-Template`](https://github.com/ga-wdi-boston/express-api-template) for basic template setup per requirements in setup guide. Be sure to run the API server with 'npm start'.
-
 ## Technologies Used
 - Front-end: HTML, CSS, SCSS, JavaScript, jQuery, AJAX, Bootstrap, Handlebars.js
 - Back-end: Express.js, MongoDB, (RESTful API), Node modules
