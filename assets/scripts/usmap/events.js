@@ -151,9 +151,9 @@ const onSaveEdit = (event) => {
       onGetItems(1, 1, $(event.target).attr('data-state'))
     })
     .catch(ui.saveEditFailure)
-    .then(ui.updateAfterEditSuccess)
+    // .then(ui.updateAfterEditSuccess)
     .then(createFormHandler)
-    .catch(ui.updateAfterEditFailure)
+    // .catch(ui.updateAfterEditFailure)
 }
 // swap in the edit form template
 const showEditForm = (event) => {
