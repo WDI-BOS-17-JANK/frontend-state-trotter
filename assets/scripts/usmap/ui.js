@@ -19,7 +19,9 @@ const updateAfterEditSuccess = (data) => {
 
     return current === data.item._id
   })
-  const addItemToListHtml = addItemToList({item: data.item})
+  const addItemToListHtml = addItemToList({
+    item: data.item
+  })
   const $checkBoxToUpdate = $buttonToUpdate.parents('.checkbox-item')
   $($checkBoxToUpdate).replaceWith(addItemToListHtml)
 }
@@ -61,6 +63,7 @@ const getItemsSuccess = (data, region) => {
 
 const getItemsFailure = (data) => {
   console.error(data)
+  $('.status-message').text('Oops! Not able to retrieve your goals. Please try again.')
 }
 
 const getmyGoalsSuccess = (data) => {
@@ -109,6 +112,7 @@ const getmyGoalsSuccess = (data) => {
 
 const getmyGoalsFailure = (data) => {
   console.error(data)
+  $('.next-goal').text('Oops! Not able to retrieve goals. Please try again.')
 }
 
 const createItemSuccess = (data) => {
@@ -119,39 +123,48 @@ const createItemSuccess = (data) => {
   // console.log('store.currentItems after is', store.currentItems)
   // form disappears on sucsess
   $('#create-item').remove()
+  $('.next-goal').text('Goal added!')
   return data
 }
 
 const createItemFailure = (data) => {
   console.error(data)
+  $('.next-goal').text('Oops! Not able to add this goal. Please try again.')
 }
 
 const getItemSuccess = (data) => {
   console.log(data)
   data.item.due_date = formatDate(data.item.due_date)
   data.item.createdAt = formatDate(data.item.createdAt)
+
   $('#create-item-container').html(stateDefaultItem({item: data.item}))
   $('.detail-header').text('Selected Item:')
+  // $('.status-message').text('Check out your goal\'s details!')
 }
 
 const getItemFailure = (data) => {
   console.error(data)
+  $('.next-goal').text('Oops! Not able to show your goal\'s details. Please try again.')
 }
 
 const updateItemSuccess = (data) => {
   console.log(data)
+  $('.next-goal').text('You\'ve updated a goal!')
 }
 
 const updateItemFailure = (data) => {
   console.error(data)
+  $('.next-goal').text('Oops! This goal was not updated. Please try again.')
 }
 
 const destroyItemSuccess = (data) => {
-  console.log('successfully destroyed item')
+  console.log(data)
+  $('.next-goal').text('You\'ve deleted a goal!')
 }
 
 const destroyItemFailure = (data) => {
   console.error(data)
+  $('.next-goal').text('Oops! This goal was not deleted. Please try again.')
 }
 
 module.exports = {
