@@ -12,11 +12,12 @@
   data-location="{{item.data-location}}">
 
   <fieldset>
-    <input class="form-control" type="text" name="items[title]" value="{{item.data-title}}" required>
-    <input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="items[due_date]" value="{{item.data-date}}" required>
-    <input class="form-control" type="text" name="items[location]" value="{{item.data-location}}" required>
-    <input class="form-control" type="text" name="items[description]" value="{{item.data-description}}" required>
-    <input class="form-control" type="text" name="items[category]" value="{{item.data-category}}" required>
+    <p1>Title:<input class="form-control" type="text" name="items[title]" value="{{item.data-title}}" required></p1>
+    <p1>Due Date:<input class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  name="items[due_date]" value="{{item.data-date}}" required></p1>
+    <p1>Location:<input class="form-control" type="text" name="items[location]" value="{{item.data-location}}" required>
+    <p1>Description:<input class="form-control" type="text" name="items[description]" value="{{item.data-description}}" required>
+    <p1>Category:<input class="form-control" type="text" name="items[category]" value="{{item.data-category}}" required>
+    <p1>Status:<input class="form-control" type="text" name="items[status]" value="{{item.data-status}}" required>
     <button data-id="{{item.id}}" class="glyphicon glyphicon-ok-circle" type="submit" name="Submit"></button>
     <button data-id="{{item.id}}" id="cancel-update" class="glyphicon glyphicon-remove-circle cancel-update" type="button" name="Cancel"></button>
   </fieldset>
