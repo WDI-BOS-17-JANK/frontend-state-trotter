@@ -129,14 +129,10 @@ const onCreateItem = function (event) {
 
   api.createItem(newData)
     .then(ui.createItemSuccess)
-    // pass in 'data' from createItemSuccess, call it 'newItem'
-    .then((newItem) => {
-      console.log(newItem)
-      // Pass in newly created item into add-item-to-list.handlebars
-      const newItemHtml = addItemToList({item: newItem.item})
-      // append this new html to #new-item-container in state-all-items.handlebars
-      $('#new-item-container').append(newItemHtml)
+    .then(() => {
+      onGetItems(1, 1, newData.item.state)
     })
+    // .then(showStateView)
     .catch(ui.createItemFailure)
 }
 
