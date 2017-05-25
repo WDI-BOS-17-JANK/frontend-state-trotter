@@ -33,14 +33,9 @@ const showSelectedItem = (event) => {
 }
 
 const goBacktoMap = () => {
-  // alert('inside goBacktoMap')
-  // $('#map-view-container').html(mapPage)
-  // console.log('mapEvents is', mapEvents)
-  // mapEvents.usMap()
   $('#back-to-map-container').empty()
   $('#state-view').empty()
   $('#map-view-container').fadeIn()
-  event.preventDefault()
   api.getItems()
     .then((data) => {
       ui.getmyGoalsSuccess(data)
