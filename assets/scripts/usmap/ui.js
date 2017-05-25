@@ -60,12 +60,10 @@ const getItemsSuccess = (data, region) => {
 }
 
 const getItemsFailure = (data) => {
-  console.error(data)
+
 }
 
 const getmyGoalsSuccess = (data) => {
-  console.log('in getmyGoalsSuccess and data is', data)
-
   const sortedData = data.items.sort(function (a, b) {
     a = new Date(a.due_date)
     b = new Date(b.due_date)
@@ -75,11 +73,9 @@ const getmyGoalsSuccess = (data) => {
   const incompleteItems = sortedData.filter((item) => {
     return item.status === 'incomplete'
   })
-  console.log('incompleteItems is', incompleteItems)
 
   if (incompleteItems.length > 0) {
     const nextIncompleteItem = incompleteItems[0]
-    console.log('nextIncompleteItem is', nextIncompleteItem)
 
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
 
@@ -108,26 +104,21 @@ const getmyGoalsSuccess = (data) => {
 }
 
 const getmyGoalsFailure = (data) => {
-  console.error(data)
 }
 
 const createItemSuccess = (data) => {
-  // console.log('data in createItemSuccess is', data)
-  // console.log('store.currentItems before is', store.currentItems)
   // Push newly created item into the currentItems object. Now it is an object of all items (in an array), including new ones.
   store.currentItems.items.push(data.item)
-  // console.log('store.currentItems after is', store.currentItems)
   // form disappears on sucsess
   $('#create-item').remove()
   return data
 }
 
 const createItemFailure = (data) => {
-  console.error(data)
+
 }
 
 const getItemSuccess = (data) => {
-  console.log(data)
   data.item.due_date = formatDate(data.item.due_date)
   data.item.createdAt = formatDate(data.item.createdAt)
   $('#create-item-container').html(stateDefaultItem({item: data.item}))
@@ -135,23 +126,22 @@ const getItemSuccess = (data) => {
 }
 
 const getItemFailure = (data) => {
-  console.error(data)
 }
 
 const updateItemSuccess = (data) => {
-  console.log(data)
+
 }
 
 const updateItemFailure = (data) => {
-  console.error(data)
+
 }
 
 const destroyItemSuccess = (data) => {
-  console.log('successfully destroyed item')
+
 }
 
 const destroyItemFailure = (data) => {
-  console.error(data)
+
 }
 
 module.exports = {

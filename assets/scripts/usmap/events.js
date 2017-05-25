@@ -9,24 +9,19 @@ const formatDate = require('./formatDate.js')
 // templates
 const editFormTemplate = require('../templates/state-item-update.handlebars')
 const showStateItemCreateTemplate = require('../templates/state-item-create.handlebars')
-const addItemToList = require('../templates/add-item-to-list.handlebars')
 const showStateAllTemplate = require('../templates/state-all-items.handlebars')
 const stateDefaultItem = require('../templates/state-default-item.handlebars')
 
 const deleteItem = function (event) {
-  console.log('in delete item and event.target is ', $(event.target).attr('data-id'))
-  console.log('in delete item and region is ', $(event.target).attr('data-state'))
   const id = $(event.target).attr('data-id')
   const region = $(event.target).attr('data-state')
   onDestroyItem(id, region)
 }
 
 const showSelectedItem = (event) => {
-  console.log('inside showSelectedItem and event is', event.target)
   // on click of the display button ('#display-button'),
   // display the state-default items handlebar
   const id = $(event.target).attr('data-id')
-  console.log('id is ', id)
   api.showItem(id)
   .then(ui.getItemSuccess)
   .catch(ui.getItemsFailure)
@@ -36,6 +31,9 @@ const goBacktoMap = () => {
   $('#back-to-map-container').empty()
   $('#state-view').empty()
   $('#map-view-container').fadeIn()
+
+  $('#status-message').empty()
+
   api.getItems()
     .then((data) => {
       ui.getmyGoalsSuccess(data)
@@ -46,7 +44,6 @@ const goBacktoMap = () => {
 const onGetItems = function (element, code, region) {
   $('.status-message').text(region)
   if (event) { event.preventDefault() }
-  console.log('Starting onGetItems and region is ', region)
   api.getItems()
     .then((data) => {
       return ui.getItemsSuccess(data, region)
@@ -88,7 +85,6 @@ const onShowItem = function (element, code, region) {
 }
 
 const onUpdateItem = function (event) {
-  console.log(event)
   const content = getFormFields(event.target)
   event.preventDefault()
   api.updateItem(content)
@@ -128,13 +124,10 @@ const onCreateItem = function (event) {
     .then(() => {
       onGetItems(1, 1, newData.item.state)
     })
-    // .then(showStateView)
     .catch(ui.createItemFailure)
 }
 
 const cancelCreate = () => {
-  // console.log('store in cancelCreate is', store)
-  // console.log('store.currentItems in cancelCreate is', store.currentItems)
   // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
   onGetItems(1, 1, store.state)
   $('#state-header').text(store.state)
@@ -188,7 +181,6 @@ const showEditForm = (event) => {
 }
 
 const showStateView = (items) => {
-  console.log('in showstateview items is', items)
   store.currentItems = items
   const sortedData = items.items.sort(function (a, b) {
     a = new Date(a.due_date)
@@ -202,15 +194,12 @@ const showStateView = (items) => {
   const incompleteItems = sortedData.filter((item) => {
     return item.status === 'incomplete'
   })
-  console.log('incompleteItems is', incompleteItems)
 
   if (incompleteItems.length > 0) {
     const nextIncompleteItem = incompleteItems[0]
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
     nextIncompleteItem.createdAt = formatDate(nextIncompleteItem.createdAt)
-    console.log('nextIncompleteItem is', nextIncompleteItem)
     $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
-    console.log('no incomplete items')
   } else {
     showCreateform()
   }
@@ -237,7 +226,6 @@ const usMap = function () {
       $('#map-tooltip').text(region)
     },
     onRegionClick: function (element, code, region) {
-      console.log('what state did i click on?', region)
       onGetItems(element, code, region)
     }
   })
