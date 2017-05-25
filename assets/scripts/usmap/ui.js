@@ -63,7 +63,7 @@ const getItemsSuccess = (data, region) => {
 
 const getItemsFailure = (data) => {
   console.error(data)
-  $('.status-message').text('Oops! Not able to retrieve your goals. Please try again.').fadeOut(3000)
+  $('.status-message').text('Oops! Not able to retrieve your goals. Please try again.').show().fadeOut(3000)
 }
 
 const getmyGoalsSuccess = (data) => {
@@ -106,13 +106,13 @@ const getmyGoalsSuccess = (data) => {
       }
     })
   } else {
-    $('#next-goal').text('Add some goals before you sign out!').fadeOut(3000)
+    $('.userMessage').text('Add some goals before you sign out!').show().fadeOut(3000)
   }
 }
 
 const getmyGoalsFailure = (data) => {
   console.error(data)
-  $('.userMessage').text('Oops! Not able to retrieve goals. Please try again.').fadeOut(3000)
+  $('.userMessage').text('Oops! Not able to retrieve goals. Please try again.').show().fadeOut(3000)
 }
 
 const createItemSuccess = (data) => {
@@ -123,13 +123,13 @@ const createItemSuccess = (data) => {
   // console.log('store.currentItems after is', store.currentItems)
   // form disappears on sucsess
   $('#create-item').remove()
-  $('#next-goal').text('Goal added!').fadeOut(3000)
+  $('.userMessage').text('Goal added!').show().fadeOut(3000)
   return data
 }
 
 const createItemFailure = (data) => {
   console.error(data)
-  $('.userMessage').text('Oops! Not able to add this goal. Please try again.').fadeOut(3000)
+  $('.userMessage').text('Oops! Not able to add this goal. Please try again.').show().fadeOut(3000)
 }
 
 const getItemSuccess = (data) => {
@@ -140,32 +140,32 @@ const getItemSuccess = (data) => {
   $('#create-item-container').html(stateDefaultItem({item: data.item}))
   $('.detail-header').text('Selected Item:')
 
-  $('.userMessage').text('Check out your goal\'s details!').fadeOut(3000)
+  $('.userMessage').text('Check out your goal\'s details!').show().fadeOut(3000)
 }
 
 const getItemFailure = (data) => {
   console.error(data)
-  $('.userMessage').text('Oops! Not able to show your goal\'s details. Please try again.').fadeOut(3000)
+  $('.userMessage').text('Oops! Not able to show your goal\'s details. Please try again.').show().fadeOut(3000)
 }
 
 const updateItemSuccess = (data) => {
   console.log(data)
-  $('.userMessage').text('You\'ve updated a goal!').fadeOut(3000)
+  $('.userMessage').text('You\'ve updated a goal!').show().fadeOut(3000)
 }
 
 const updateItemFailure = (data) => {
   console.error(data)
-  $('.userMessage').text('Oops! This goal was not updated. Please try again.').fadeOut(3000)
+  $('.userMessage').text('Oops! This goal was not updated. Please try again.').show().fadeOut(3000)
 }
 
 const destroyItemSuccess = (data) => {
   console.log(data)
-  $('.userMessage').text('You\'ve deleted a goal!').fadeOut(3000)
+  $('.userMessage').text('You\'ve deleted a goal!').show().fadeOut('slow')
 }
 
 const destroyItemFailure = (data) => {
   console.error(data)
-  $('.userMessage').text('Oops! This goal was not deleted. Please try again.').fadeOut(3000)
+  $('.userMessage').text('Oops! This goal was not deleted. Please try again.').show().fadeOut(3000)
 }
 
 module.exports = {
