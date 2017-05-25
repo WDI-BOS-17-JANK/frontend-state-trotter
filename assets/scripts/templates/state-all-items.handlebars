@@ -5,10 +5,6 @@
   <div class="col-sm-8" id="item-list">
     {{#each items as |item|}}
       <div class="checkbox-item">
-        <label class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-            </label>
             <span>{{item.title}}</span>
           <button
               data-title="{{item.title}}"
