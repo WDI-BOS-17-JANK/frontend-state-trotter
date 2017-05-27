@@ -202,6 +202,7 @@ const showStateView = (items) => {
     $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
   } else {
     showCreateform()
+    $('#cancel-create').remove()
   }
 }
 
@@ -248,6 +249,7 @@ const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
   $('#cancel-create').on('click', cancelCreate)
+  $('#create-button').remove()
 }
 
 const editHandlers = () => {
