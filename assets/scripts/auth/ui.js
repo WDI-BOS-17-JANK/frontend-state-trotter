@@ -25,6 +25,7 @@ const signUpFailure = () => {
 
 const signInSuccess = (response) => { // argument can be (response) or something too. Just an argument name
   $('#modal-signin').modal('hide')
+  $('.status-message').text('')
   document.getElementById('sign-in').reset()
   // In case someone clicks 'back' in browser while siebar still open, then goes forward again to the page, and signs in.
   store.user = response.user // response.user is the email id and token // stores whatever that was in that response
