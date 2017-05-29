@@ -12,16 +12,23 @@ const landingTemplate = require('../templates/landing.handlebars')
 const onSignUp = function (event) {
   const data = getFormFields(this) // this will refer to event.target because it gets passed into addHandlers as a callback.
   event.preventDefault()
-  // api.signUp(data) // check the api.js file to see. When successful, show signUpSucess message, otherwise, signUpFailure message
-  //   .then(ui.signUpSuccess)
-  //   .catch(ui.signUpFailure)
   api.signUp(data) // check the api.js file to see. When successful, show signUpSucess message, otherwise, signUpFailure message
     .then(ui.signUpSuccess)
-    // .then(() => {
-    //   api.signIn(data)
-    //     .then(ui.signInSuccess)
-    //     .catch(ui.signInFailure)
-    // })
+    .then(() => {
+      api.signIn(data)
+        .then(ui.signInSuccess)
+        .then($('#modal-signup').on('hidden.bs.modal', function () {
+          $('#landing-view-container').html('')
+        }))
+        .then(() => {
+          $('#main-view-container').html(mainPageNav)
+          $('#sign-out').on('submit', onSignOut)
+          $('#change-password').on('submit', onChangePassword)
+          $('#map-view-container').html(mapPage)
+          mapEvents.myGoals()
+        })
+        .catch(ui.signInFailure)
+    })
     .catch(ui.signUpFailure)
 }
 

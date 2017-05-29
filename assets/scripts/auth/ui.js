@@ -7,14 +7,11 @@ const store = require('../store.js')
 
 const signUpSuccess = (response) => { // argument can be (response) or something too. Just an argument name
   // $('.signup-status-message').text('Successfully signed up. Please wait for page to load.')
+  console.log('in signUpSuccess')
   $('#modal-signup').modal('hide')
   document.getElementById('sign-up').reset()
 
   store.user = response.user // response.user is the email id and token // stores whatever that was in that response
-  // event.preventDefault() // don't use this or else won't work
-  // flashcardapi.getFlashcards()
-  //   .then(flashcardui.getFlashcardsSuccess)
-  //   .catch(flashcardui.getFlashcardsFailure)
   $('.status-message').text('Account created. Sign In!')
 }
 
@@ -24,6 +21,7 @@ const signUpFailure = () => {
 }
 
 const signInSuccess = (response) => { // argument can be (response) or something too. Just an argument name
+  console.log('in signInSuccess')
   $('#modal-signin').modal('hide')
   $('.status-message').text('')
   document.getElementById('sign-in').reset()
