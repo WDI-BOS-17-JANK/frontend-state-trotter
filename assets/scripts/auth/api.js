@@ -13,6 +13,7 @@ const signUp = (data) => {
 } // an object we'll pass into as an ajax request
 
 const signIn = (data) => { // data object passed into  argument will be different from argument in above function
+  console.log('in signIn and the data is ', data)
   return $.ajax({
     url: config.apiOrigin + '/sign-in',
     method: 'POST', // has to be a string
