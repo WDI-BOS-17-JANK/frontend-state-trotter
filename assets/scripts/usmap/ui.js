@@ -53,7 +53,6 @@ const getItemsSuccess = (data, region) => {
   hideMap()
   // 'item' below has to be 'item' in state-all-items.handlebars
   // We need to pass filteredItems to showStateView rather than data.items
-  $('#state-header').text(store.state)
   $('#back-to-map-container').html(backToMapTemplate)
   // $('#back-to-map-button').on('click', goBacktoMap)
   return filteredItems
