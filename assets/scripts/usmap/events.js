@@ -130,7 +130,7 @@ const onCreateItem = function (event) {
 const cancelCreate = () => {
   // store.currentItems here contains all items including newly created item (see createItemSuccess). Pass in this new object to refresh the list of all items on left pane (in state view)
   onGetItems(1, 1, store.state)
-  $('#state-header').text(store.state)
+  // $('#state-header').text(store.state)
 }
 
 const cancelUpdate = () => {
