@@ -25,6 +25,7 @@ const showSelectedItem = (event) => {
   api.showItem(id)
   .then(ui.getItemSuccess)
   .catch(ui.getItemsFailure)
+  $('#create-button').show()
 }
 
 const goBacktoMap = () => {
@@ -71,17 +72,6 @@ const myGoals = function () {
     })
     .then(usMap)
     .catch(ui.getmyGoalsFailure)
-}
-
-const onShowItem = function (element, code, region) {
-  event.preventDefault()
-  const item = getFormFields(event.target).item
-  api.showItem(item.id)
-      .then(ui.showItemSuccess)
-      .then((data) => {
-        ui.showItemSuccess(data, region)
-      })
-      .catch(ui.showItemFailure)
 }
 
 const onUpdateItem = function (event) {
@@ -194,12 +184,20 @@ const showStateView = (items) => {
   const incompleteItems = sortedData.filter((item) => {
     return item.status === 'incomplete'
   })
+  const completeItems = sortedData.filter((item) => {
+    return item.status !== 'incomplete'
+  })
 
   if (incompleteItems.length > 0) {
     const nextIncompleteItem = incompleteItems[0]
     nextIncompleteItem.due_date = formatDate(nextIncompleteItem.due_date)
     nextIncompleteItem.createdAt = formatDate(nextIncompleteItem.createdAt)
     $('#create-item-container').html(stateDefaultItem({item: nextIncompleteItem}))
+  } else if (completeItems.length > 0) {
+    const nextCompleteItem = completeItems[completeItems.length - 1]
+    nextCompleteItem.due_date = formatDate(nextCompleteItem.due_date)
+    nextCompleteItem.createdAt = formatDate(nextCompleteItem.createdAt)
+    $('#create-item-container').html(stateDefaultItem({item: nextCompleteItem}))
   } else {
     showCreateform()
     $('#cancel-create').remove()
@@ -249,7 +247,7 @@ const showCreateform = () => {
   $('#create-item-container').html(showStateItemCreateTemplate)
   $('#create-item').on('submit', onCreateItem)
   $('#cancel-create').on('click', cancelCreate)
-  $('#create-button').remove()
+  $('#create-button').hide()
 }
 
 const editHandlers = () => {
@@ -259,7 +257,6 @@ module.exports = {
   addHandlers,
   usMap,
   myGoals,
-  onShowItem,
   // onCreateItem,
   onUpdateItem
 }
